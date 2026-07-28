@@ -1,908 +1,384 @@
-# Intelligent Stock Screener
+# 📊 S&P 500 미너비니 SEPA 스크리너
 
-> **A production-grade systematic trading system for identifying high-probability stock setups using phase-based technical analysis, relative strength momentum, and smart fundamental screening.**
+> **마크 미너비니의 SEPA 방법론을 기반으로 S&P 500 전체를 매일 자동 스캔하여, 매수·매도 신호를 한국어 웹 대시보드로 제공하는 주식 스크리너입니다.**
 
-[![Python](https://img.shields.io/badge/Python-3.13+-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Code Style](https://img.shields.io/badge/Code%20Style-Black-black.svg)](https://github.com/psf/black)
-[![Daily Scan](https://github.com/RyanJHamby/stock-screener/actions/workflows/daily_screening_git_storage.yml/badge.svg)](https://github.com/RyanJHamby/stock-screener/actions/workflows/daily_screening_git_storage.yml)
+[![Daily Scan](https://github.com/tehryung-ray/SNP_momentum_screener/actions/workflows/daily_screening_git_storage.yml/badge.svg)](https://github.com/tehryung-ray/SNP_momentum_screener/actions/workflows/daily_screening_git_storage.yml)
 
 ---
 
-![Example scan output showing benchmark summary, market breadth, and top buy signals](assets/example-output.png)
+**🌐 [라이브 대시보드](https://tehryung-ray.github.io/SNP_momentum_screener/) · 📖 [완전 가이드](https://tehryung-ray.github.io/SNP_momentum_screener/guide.html)**
 
 ---
 
-## Table of Contents
+## 목차
 
-- [Overview](#overview)
-- [System Architecture](#system-architecture)
-- [Key Features](#key-features)
-- [Design Philosophy](#design-philosophy)
-- [Quick Start](#quick-start)
-- [Daily Workflow](#daily-workflow)
-- [Manual Position Management](#manual-position-management)
-- [Project Structure](#project-structure)
-- [Technical Details](#technical-details)
-- [Future Improvements](#future-improvements)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
-## Overview
-
-**Intelligent Stock Screener** is a fully automated, data-driven stock screening and position management system that scans 3,800+ US stocks daily to identify high-conviction buy and sell signals based on:
-
-- **Phase-based trend classification** (4-stage market cycle analysis)
-- **Relative strength momentum** (smooth linear scoring vs SPY)
-- **Fundamental quality filters** (growth, profitability, financial health)
-- **Volume-weighted breakout detection**
-- **Risk-managed stop loss recommendations**
-
-This system was built to eliminate emotional decision-making and provide objective, repeatable trade signals backed by technical and fundamental analysis.
-
-### What This System Does
-
-1. **Screens 3,800+ stocks every market day** using GitHub Actions automation
-2. **Identifies buy signals** for stocks in confirmed Phase 2 uptrends that pass Minervini's 8-criteria Trend Template
-3. **Identifies sell signals** when stocks enter Phase 3 (distribution) or Phase 4 (downtrend) with weakening momentum
-4. **Calculates precise stop losses** with risk/reward ratios for every buy signal (max 10% risk, min 2:1 R:R)
-5. **Generates daily reports** with ranked opportunities and full technical analysis
-6. **Manages existing positions** with automated stop-loss trailing recommendations
-
-### Why I Built It This Way
-
-**Problem:** Most stock screeners rely on static fundamental metrics (P/E, P/B) or generic technical patterns that don't adapt to market conditions. They ignore:
-- **Market regime** (is SPY in an uptrend or downtrend?)
-- **Relative strength** (is the stock outperforming the market?)
-- **Phase transitions** (is the stock breaking out or breaking down?)
-- **Smart caching** (redundant API calls wasting time and hitting rate limits)
-
-**Solution:** This system implements Mark Minervini's **Trend Template methodology** where:
-- Only buy **confirmed Phase 2 uptrends** (not early Phase 1 bases)
-- Must pass **7 of 8 strict technical criteria** (50>150>200 SMA, price near highs, etc.)
-- **Timing matters** - only buy when market (SPY) is also healthy
-- **Relative strength matters** - only buy stocks outperforming the market
-- **Cache-first design** - 74% reduction in API calls through Git-based fundamental storage
+- [소개](#소개)
+- [라이브 대시보드](#라이브-대시보드)
+- [핵심 기능](#핵심-기능)
+- [분석 방법론](#분석-방법론)
+  - [4단계 주식 사이클](#4단계-주식-사이클)
+  - [미너비니 추세 템플릿](#미너비니-추세-템플릿-8가지-기준)
+  - [VCP 패턴](#vcp-패턴-변동성-수축-패턴)
+  - [WM 점수 (가중모멘텀)](#wm-점수-가중모멘텀)
+  - [매수 신호 채점 시스템](#매수-신호-채점-시스템-125점-만점)
+- [시스템 구조](#시스템-구조)
+- [프로젝트 구조](#프로젝트-구조)
+- [자동화 파이프라인](#자동화-파이프라인-github-actions)
+- [로컬 실행 방법](#로컬-실행-방법)
+- [주의사항](#주의사항)
+- [라이선스](#라이선스)
 
 ---
 
-## Methodology & Attribution
+## 소개
 
-This system implements **Mark Minervini's Trend Template** (also known as SEPA - Specific Entry Point Analysis), a systematic approach to identifying high-probability stock setups in confirmed Stage 2 uptrends.
+이 시스템은 미국 주식시장의 대표 지수인 **S&P 500에 포함된 약 503개 종목**을 매 평일 자동으로 스캔합니다. 전설적인 트레이더 **마크 미너비니(Mark Minervini)** 의 SEPA(Specific Entry Point Analysis) 방법론을 코드로 구현하여, 객관적이고 반복 가능한 매매 신호를 생성합니다.
 
-### Mark Minervini's Influence
+분석 결과는 **GitHub Pages에 자동 배포**되는 한국어 웹 대시보드로 제공됩니다. 별도의 설치 없이 브라우저에서 바로 확인할 수 있습니다.
 
-The core buy signal methodology is based on principles from:
+### 이 스크리너가 하는 일
 
-- **"Trade Like a Stock Market Wizard"** (2013) - Minervini's systematic approach to stock selection using the Trend Template
-- **"Think & Trade Like a Champion"** (2017) - Advanced stage analysis and risk management techniques
-- **"Momentum Masters"** (2015) - Multi-contributor insights on momentum trading strategies
-
-### The Minervini Trend Template (8 Criteria)
-
-Buy signals **only** trigger when stocks pass **7 of 8 strict criteria**:
-
-1. ✅ **Price > 150 SMA AND 200 SMA** - Stock must be in established uptrend
-2. ✅ **150 SMA > 200 SMA** - Moving averages in bullish alignment
-3. ✅ **200 SMA trending up ≥1 month** - Long-term trend is bullish
-4. ✅ **50 SMA > 150 SMA > 200 SMA** - Strongest SMA configuration (cascading)
-5. ✅ **Price > 50 SMA** - Stock respecting short-term support
-6. ✅ **Price ≥30% above 52-week low** - Stock has built significant base
-7. ✅ **Price within 25% of 52-week high** - Near new highs (not extended)
-8. ✅ **Relative Strength ≥70** - Outperforming market (we use RS slope ≥ +0.15)
-
-**Why This Works:**
-- Identifies stocks in **confirmed uptrends** (not early bases)
-- Filters out weak stocks with poor price structure
-- Ensures proper risk/reward (stocks near highs with strong momentum)
-- Aligns with institutional buying (big money follows strong trends)
-
-### Additional Influences
-
-While the core entry criteria follow Minervini's template, this system also incorporates concepts from:
-
-- **Stan Weinstein** - 4-stage market cycle analysis ("Secrets for Profiting in Bull and Bear Markets")
-- **William O'Neil** - Fundamental screening criteria (CANSLIM methodology)
-- **IBD Methodology** - Relative strength ranking and market regime awareness
-
-### Our Implementation
-
-We've automated Minervini's manual screening process with additional enhancements:
-
-- **Smooth linear scoring** instead of binary pass/fail (reduces false signals)
-- **Market regime filtering** (SPY phase + breadth checks - only buy in healthy markets)
-- **Automated fundamental screening** (growth, profitability, financial health)
-- **Precise stop-loss calculation** (ATR-based + swing lows, max 10% risk)
-- **R:R validation** (only include signals with ≥2:1 reward/risk ratio)
-
-The system stays true to Minervini's core principle: **Buy confirmed Stage 2 breakouts with strong fundamentals and clear risk management.**
+1. **매 평일 S&P 500 전 종목 자동 스캔** — GitHub Actions으로 12:00 UTC(한국 시간 밤 9시) 실행
+2. **2페이즈 상승추세 종목 필터링** — 미너비니 8가지 추세 템플릿 기준 7개 이상 충족 종목만 선별
+3. **매수 신호 생성** — 125점 만점 채점 후 60점 이상 종목을 순위별 표시
+4. **매도 신호 생성** — 3·4페이즈 진입 종목에 매도 경고 표시
+5. **손절가·손익비 계산** — 모든 매수 신호에 ATR 또는 스윙 저점 기반 손절가 자동 산출
+6. **시장 환경 분석** — SPY 페이즈 + 시장 폭(Market Breadth)으로 전체 시장 건강도 판단
+7. **웹 대시보드 자동 배포** — GitHub Pages에 `docs/index.html` 자동 게시
 
 ---
 
-## System Architecture
+## 라이브 대시보드
+
+**→ [https://tehryung-ray.github.io/SNP_momentum_screener/](https://tehryung-ray.github.io/SNP_momentum_screener/)**
+
+| 영역 | 내용 |
+|------|------|
+| **통계 요약** | 분석 종목 수, 매수·매도 신호 수, 스캔 시간, 오류율, 시장 국면 |
+| **SPY 벤치마크** | 현재 SPY 페이즈, 50·200일 이동평균선, 신뢰도 |
+| **시장 폭** | S&P 500 전체 종목의 페이즈 분포 막대 그래프 |
+| **매수 신호** | 125점 점수 순 정렬, 카드형 UI |
+| **매도 신호** | 페이즈 이탈 종목 리스트 |
+
+각 매수 신호 카드에는 다음 정보가 포함됩니다:
+
+- **미너비니 기준 통과율** (녹색 점 8개)
+- **손절가** / **손익비** / **돌파가**
+- **RS 기울기** / **거래량 배수** / **진입 품질**
+- **WM 점수** (가중모멘텀)
+- **VCP 패턴** 감지 여부 및 강도
+- 매수 근거 상세 설명
+
+---
+
+## 핵심 기능
+
+### ✅ 페이즈 기반 추세 분류
+
+50일·150일·200일 이동평균선의 기울기와 정렬 상태를 분석하여 모든 종목을 4단계 중 하나로 분류합니다.
+
+### 📈 상대 강도 (RS) 스코어링
+
+63일(3개월) 선형 회귀 기울기로 SPY 대비 초과 성과를 부드러운 연속 값으로 산출합니다. 이진 pass/fail이 아닌 연속 점수 방식으로 인위적 경계를 제거했습니다.
+
+### 💰 기초체력 (펀더멘털) 분석
+
+분기 실적 데이터를 기반으로 매출 성장, EPS 성장, 영업 마진 변화를 평가합니다. 2페이즈 매수 신호에만 적용하고, 4페이즈 매도 신호는 차트 분석만 사용합니다.
+
+### 🎯 ATR 기반 손절가 자동 산출
+
+- **방법 1**: ATR(14일) × 2.0을 현재가에서 차감
+- **방법 2**: 최근 20일 스윙 저점 × 0.98 (2% 버퍼)
+- 두 값 중 **높은 쪽(더 보수적인 쪽)** 적용
+- 최대 손실 10% 이내, 최소 손익비 2:1 이상인 경우에만 신호 포함
+
+### 🌀 VCP 패턴 자동 탐지
+
+변동성 수축 패턴(Volatility Contraction Pattern)을 자동 감지하여 수축 횟수와 패턴 강도(0–100)를 표시합니다.
+
+### 🤖 완전 자동화
+
+GitHub Actions으로 매 평일 자동 실행, 결과를 저장소에 커밋 후 GitHub Pages에 배포합니다. 별도 서버 없이 완전 무료로 운영됩니다.
+
+### 📦 스마트 캐싱
+
+펀더멘털 데이터를 Git 저장소에 JSON으로 저장합니다.  
+- 실적 시즌(분기 종료 후 6주): 7일 이상 된 캐시 갱신  
+- 일반 기간: 90일 이상 된 캐시 갱신  
+- 결과: API 호출 약 74% 감소, 스캔 시간 단축
+
+---
+
+## 분석 방법론
+
+### 4단계 주식 사이클
+
+스탠 웨인스타인(Stan Weinstein)의 4단계 사이클과 미너비니의 Phase 분류를 결합한 방식입니다. 모든 주식은 아래 4단계를 반복합니다.
+
+| 페이즈 | 이름 | 특징 | 신호 |
+|--------|------|------|------|
+| **1페이즈** | 베이스 형성 | 하락 후 횡보, 이평선 수평화 | 관망 |
+| **2페이즈** | 상승추세 | 50>150>200 정렬, 모두 상승 중 | ✅ 매수 신호 |
+| **3페이즈** | 분산 | 고점 횡보, 이평선 수평화 시작 | ⚠️ 매도 준비 |
+| **4페이즈** | 하락추세 | 50<200 교차, 주가 이평선 하회 | 🚨 매도 신호 |
+
+이 시스템은 **2페이즈 종목에서만 매수 신호를 생성**합니다.
+
+### 미너비니 추세 템플릿 (8가지 기준)
+
+매수 신호 발생을 위해 아래 8가지 중 **7개 이상** 충족 필요:
+
+| # | 기준 | 설명 |
+|---|------|------|
+| 1 | 현재가 > 150일 이평선 | 중기 상승추세 확인 |
+| 2 | 현재가 > 200일 이평선 | 장기 상승추세 확인 |
+| 3 | 150일선 > 200일선 | 골든크로스 상태 유지 |
+| 4 | 200일선 ≥ 1개월째 상승 | 장기 추세 지속성 확인 |
+| 5 | 50일선 > 150일선 > 200일선 | 3중 정렬 (가장 강한 배열) |
+| 6 | 현재가 > 50일 이평선 | 단기 모멘텀 확인 |
+| 7 | 현재가 ≥ 52주 최저가 × 1.25 | 바닥 대비 25% 이상 상승 |
+| 8 | 현재가 ≥ 52주 최고가 × 0.75 | 최고가 대비 25% 이내 위치 |
+
+### VCP 패턴 (변동성 수축 패턴)
+
+주가의 등락 폭이 점진적으로 줄어들며 에너지를 압축하다가 거래량 증가와 함께 돌파하는 패턴입니다. 기관이 조용히 주식을 매집하는 구간으로 해석합니다.
+
+```
+← 수축 1 (큰 폭) → ← 수축 2 → ← 수축 3 → 💥 돌파!
+        ↕ 15%          ↕ 10%      ↕ 5%       (거래량 폭증)
+```
+
+감지된 경우 카드에 `⭐ VCP 75/100` 형태로 표시되며, 채점 시 +5점 보너스가 부여됩니다.
+
+### WM 점수 (가중모멘텀)
+
+최근 성과에 더 높은 가중치를 부여하여 단기 모멘텀을 포착하는 지표입니다.
+
+```
+WM = 12 × (1개월 수익률)
+   +  4 × (3개월 수익률)
+   +  2 × (6개월 수익률)
+   +  1 × (12개월 수익률)
+```
+
+**가중치 합계: 19** (1개월이 1년보다 12배 중요)
+
+| WM 점수 | 해석 |
+|---------|------|
+| +1.0 초과 | 강한 모멘텀 (초록색) |
+| 0 ~ +1.0 | 보통 모멘텀 (노란색) |
+| 0 미만 | 약한 모멘텀 (빨간색) |
+
+### 매수 신호 채점 시스템 (125점 만점)
+
+60점 이상이면 매수 신호로 분류하여 대시보드에 표시합니다.
+
+| 항목 | 배점 | 평가 기준 |
+|------|------|-----------|
+| **추세 구조 / 페이즈 품질** | 40점 | 2페이즈 여부, 50·150·200일선 정렬 품질, 기울기 강도 |
+| **기초체력 (펀더멘털)** | 40점 | 매출 성장률, EPS 성장률, 영업마진 변화 |
+| **손익비 (R:R)** | 15점 | ≥3:1 → 15점, ≥2:1 → 8점, 미만 → 0점 |
+| **상대 강도 (RS)** | 10점 | S&P 500 대비 초과 상승 여부 및 기울기 |
+| **거래량 패턴** | 10점 | 상승일 거래량 > 하락일 거래량 |
+| **진입 품질** | 5점 | 이동평균선 위로 얼마나 연장됐는지 |
+| **VCP 보너스** | +5점 | VCP 패턴 감지 시 추가 |
+
+---
+
+## 시스템 구조
 
 ```mermaid
 graph TB
-    subgraph "Data Layer"
-        A[Universe Fetcher<br/>3800+ US Stocks] --> B[Price Fetcher<br/>1 Year OHLCV]
-        B --> C[Fundamental Fetcher<br/>Quarterly Financials]
-        C --> D[Git Storage<br/>Smart Caching]
+    subgraph "데이터 수집"
+        A[S&P 500 유니버스<br/>~503개 종목] --> B[가격 데이터<br/>1년 OHLCV · yfinance]
+        B --> C[펀더멘털<br/>분기 실적 · yfinance]
+        C --> D[Git 캐시<br/>data/fundamentals_cache/]
     end
 
-    subgraph "Analysis Engine"
-        D --> E[Phase Classifier<br/>4-Stage Trend Analysis]
-        D --> F[RS Calculator<br/>Smooth Linear Scoring]
-        D --> G[Fundamental Analyzer<br/>Growth + Quality]
+    subgraph "분석 엔진"
+        D --> E[페이즈 분류기<br/>4단계 추세 분석]
+        D --> F[RS 계산기<br/>63일 선형 회귀]
+        D --> G[펀더멘털 분석기<br/>성장률 · 수익성]
+        D --> H[VCP 탐지기<br/>변동성 수축 패턴]
 
-        E --> H[Signal Engine]
-        F --> H
-        G --> H
+        E --> I[신호 엔진<br/>signal_engine.py]
+        F --> I
+        G --> I
+        H --> I
 
-        H --> I[Buy Signals<br/>Phase 1/2 Breakouts]
-        H --> J[Sell Signals<br/>Phase 3/4 Breakdowns]
+        I --> J[매수 신호<br/>2페이즈 · 125점]
+        I --> K[매도 신호<br/>3·4페이즈 이탈]
     end
 
-    subgraph "Risk Management"
-        I --> K[Stop Loss Calculator<br/>ATR + Swing Lows]
-        K --> L[R:R Analysis<br/>Min 2:1 Ratio]
+    subgraph "리스크 관리"
+        J --> L[손절가 계산<br/>ATR · 스윙 저점]
+        L --> M[손익비 검증<br/>최소 2:1]
     end
 
-    subgraph "Outputs"
-        L --> M[Daily Report<br/>Ranked Signals]
-        J --> M
-        M --> N[GitHub Actions<br/>Automated Delivery]
+    subgraph "GitHub Pages 배포"
+        M --> N[JSON 스캔 데이터<br/>latest_scan_data.json]
+        K --> N
+        N --> O[HTML 리포트 생성<br/>generate_html_report.py]
+        O --> P[docs/index.html<br/>한국어 웹 대시보드]
+        O --> Q[docs/guide.html<br/>완전 가이드]
     end
 
-    subgraph "Position Management"
-        O[Robinhood API<br/>Read-Only] --> P[Position Fetcher]
-        D --> P
-        P --> Q[Stop Adjuster<br/>Linear Trailing]
-        Q --> R[Position Report<br/>Manual Review]
+    subgraph "자동화"
+        R[GitHub Actions<br/>매 평일 12:00 UTC] --> A
+        P --> S[GitHub Pages<br/>tehryung-ray.github.io]
     end
 
-    style D fill:#e1f5e1
-    style H fill:#fff4e1
-    style M fill:#e1f0ff
-    style R fill:#ffe1f0
-```
-
-### Data Flow
-
-1. **Daily Scan** (GitHub Actions, 1 PM UTC M-F):
-   - Fetches universe of 3,800+ US stocks from NASDAQ/NYSE
-   - Downloads 1 year price history for each (250 trading days)
-   - Fetches fundamentals using earnings-aware cache refresh strategy
-   - Stores in Git-based cache (persists beyond Actions cache limits)
-
-2. **Signal Generation**:
-   - Classifies SPY phase to determine market regime
-   - Calculates market breadth (% stocks in each phase)
-   - For each stock: classifies phase, calculates RS, analyzes fundamentals
-   - Scores buy/sell signals using weighted formula
-   - Ranks results and generates formatted report
-
-3. **Position Management** (Manual):
-   - Fetches current positions from Robinhood (read-only)
-   - Loads cached price/fundamental data (zero extra API calls)
-   - Analyzes each position's phase, SMA levels, momentum
-   - Recommends stop loss adjustments using linear scaling formulas
-   - Outputs actionable report with exact price targets
-
----
-
-## Key Features
-
-### ✅ **Phase-Based Trend Classification**
-
-Stocks are classified into 4 phases based on moving average slopes and price position:
-
-- **Phase 1 (Base Building)**: Consolidation after decline. 50/200 SMA flattening, price finding support. **NOT YET READY**
-- **Phase 2 (Uptrend)**: Confirmed uptrend. 50>150>200 SMA (all rising), price above all SMAs. **BUY ZONE** ⭐
-- **Phase 3 (Distribution)**: Topping pattern. SMAs starting to flatten/cross, momentum weakening. **SELL ZONE**
-- **Phase 4 (Downtrend)**: Declining trend. 50 SMA < 200 SMA, both falling, price below both. **AVOID**
-
-**Important**: Following Minervini's methodology, buy signals **only** trigger for **Phase 2 stocks** that pass the Trend Template. Phase 1 stocks are still basing and not ready for entry.
-
-### 📈 **Relative Strength Momentum**
-
-- Smooth linear scoring (0-10 scale) vs SPY benchmark
-- 63-day RS slope calculation (captures 3-month momentum trend)
-- Penalizes underperformance, rewards outperformance
-- Crucial filter: only buy stocks beating the market
-
-### 💰 **Fundamental Quality Screening**
-
-- **Growth**: Revenue growth, EPS growth trends
-- **Profitability**: Operating margins, ROE
-- **Financial Health**: Debt ratios, current ratio
-- Only applied to Phase 1/2 stocks (Phase 3/4 skip fundamentals - price action is king)
-
-### 🎯 **Risk-Managed Stop Losses**
-
-Every buy signal includes:
-- **Entry price**: Current market price or breakout level
-- **Stop loss**: ATR-based or swing low-based
-- **Risk amount**: $ per share risked
-- **Reward target**: 2-3x risk minimum
-- **R:R ratio**: Always ≥ 2:1 for inclusion
-
-### 🔄 **Smart Caching Strategy**
-
-- **Price data**: Always fetch fresh (needed for current signals)
-- **Fundamentals**: Git-based storage with earnings-aware refresh
-  - Earnings season (6-week windows): Refresh if >7 days old
-  - Normal periods: Refresh if >90 days old
-  - Result: **74% reduction in API calls**, zero GitHub Actions cache expiry issues
-
-### 🤖 **Full Automation**
-
-- Runs daily via GitHub Actions (1 PM UTC, weekdays only)
-- No manual intervention required
-- Results committed to repository (full history)
-- Adaptable to market conditions (skips buy signals in weak markets)
-
----
-
-## Design Philosophy
-
-### 1. **Cache-First, API-Second**
-
-**Rationale:** yfinance has strict rate limits (~2 req/sec). Scanning 3,800 stocks requires 3,800+ API calls. At 1 TPS, that's 63 minutes. But fundamentals change slowly (quarterly earnings), so why re-fetch every day?
-
-**Solution:**
-- Store fundamentals in Git repository as JSON files
-- Add metadata with `fetched_at` timestamp
-- During scan: Check if cache exists and is fresh
-- Only fetch if stale or missing
-- Result: 1,762 cached stocks = **74% fewer API calls** = **15-20 min faster scans**
-
-### 2. **Confirmed Uptrends Only (Minervini's Stage 2)**
-
-**Rationale:** Traditional screeners look for "cheap" stocks (low P/E) or early bases (Phase 1). But cheap stocks can get cheaper, and bases can fail. Minervini only buys **confirmed Stage 2 uptrends**.
-
-**Solution:**
-- Classify stocks into 4 phases based on SMA slopes and price position
-- **Only buy Phase 2** (confirmed uptrends with 50>150>200 SMA alignment)
-- Reject Phase 1 (still basing, not confirmed)
-- Only sell Phase 2 → 3/4 transitions (breakdowns from tops)
-- This filters out 70%+ of stocks immediately, leaving only the highest-quality setups
-
-### 3. **Relative Strength as Primary Filter**
-
-**Rationale:** Absolute returns don't matter - **relative returns** do. A stock up 5% when SPY is up 10% is actually underperforming. Market leaders (high RS) tend to continue leading.
-
-**Solution:**
-- Calculate 63-day RS slope (3-month trend)
-- Smooth linear scoring (not bucket-based)
-- 10 points max for RS in buy signal scoring
-- Filters out weak stocks even if other metrics look good
-
-### 4. **Linear Formulas Over Buckets**
-
-**Rationale:** Bucket-based scoring (e.g., "P/E < 15 = 10 points, P/E 15-20 = 5 points") creates artificial cliffs. A stock with P/E 14.9 and P/E 15.1 shouldn't have a 5-point difference.
-
-**Solution:**
-- All scoring uses **linear interpolation**
-- Example: RS slope scoring scales smoothly from -0.3 (0 points) to +0.3 (10 points)
-- Stop loss trailing scales linearly with gain % (5% gain → lock 1% profit, 40% gain → lock 18% profit)
-- Result: Smoother, more reasonable scoring
-
-### 5. **Market Regime Awareness**
-
-**Rationale:** Buy signals in a bear market (SPY in Phase 4) have low win rates. Why generate signals that are likely to fail?
-
-**Solution:**
-- Classify SPY phase before generating signals
-- Calculate market breadth (% stocks in Phase 2)
-- Only generate buy signals if:
-  - SPY in Phase 1 or 2 (market not declining)
-  - AND ≥15% of stocks in Phase 2 (sufficient breadth)
-- Sell signals always generated (can exit in any market)
-
-### 6. **Read-Only Position Management**
-
-**Rationale:** Executing trades programmatically is risky and requires extensive safeguards. But **analyzing positions** and **recommending adjustments** can be automated safely.
-
-**Solution:**
-- Robinhood integration is **read-only** (only fetches positions)
-- Never calls trading functions (no `order_buy_*`, `order_sell_*`)
-- Position manager recommends stop adjustments
-- Human executes trades manually on Robinhood app
-- Best of both worlds: automation + human oversight
-
----
-
-## Quick Start
-
-### Prerequisites
-
-- Python 3.13+
-- GitHub account (for automation)
-- Robinhood account (optional, for position management)
-
-### Installation
-
-```bash
-# Clone repository
-git clone https://github.com/RyanJHamby/stock-screener.git
-cd stock-screener
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# (Optional) Install robin-stocks for position management
-pip install robin-stocks
-```
-
-### Configuration
-
-```bash
-# Copy environment template
-cp .env.example .env
-
-# Edit .env (only needed for manual position management)
-# Add: ROBINHOOD_USERNAME=your_email@example.com
-```
-
-### Run Your First Scan
-
-```bash
-# Test mode: Scan 100 stocks to verify setup
-python run_optimized_scan.py --test-mode
-
-# Full scan: All 3,800+ stocks (30-40 minutes)
-python run_optimized_scan.py --conservative
-```
-
-### View Results
-
-```bash
-# Latest scan results
-cat data/daily_scans/latest_optimized_scan.txt
-
-# All historical scans
-ls -l data/daily_scans/
+    style D fill:#1e3a5f
+    style I fill:#2d4a1e
+    style P fill:#1a1a4e
+    style S fill:#4e1a1a
 ```
 
 ---
 
-## Daily Workflow
-
-### Automated Mode (GitHub Actions)
-
-The system runs automatically every weekday at 1 PM UTC (9 AM EST):
-
-1. **Scan triggers** via GitHub Actions schedule
-2. **Fetches universe** of 3,800+ US stocks
-3. **Downloads price data** for all stocks
-4. **Loads cached fundamentals** (or fetches if stale)
-5. **Classifies phases** and calculates RS
-6. **Generates signals** based on market regime
-7. **Saves report** to `data/daily_scans/latest_optimized_scan.txt`
-8. **Commits results** to repository
-
-**You receive:**
-- Daily email/Slack notification (if configured)
-- Ranked buy signals with stop losses
-- Ranked sell signals with breakdown levels
-- Market regime analysis (SPY phase + breadth)
-
-### Manual Mode (Local)
-
-Run on-demand scans:
-
-```bash
-# Conservative scan (2 workers, 1.0s delay = ~2 TPS)
-python run_optimized_scan.py --conservative
-
-# Default scan (3 workers, 0.5s delay = ~6 TPS)
-python run_optimized_scan.py
-
-# Aggressive scan (5 workers, 0.3s delay = ~17 TPS) - MAY HIT RATE LIMITS
-python run_optimized_scan.py --aggressive
-
-# Resume from interruption
-python run_optimized_scan.py --resume
-
-# Clear cached progress and start fresh
-python run_optimized_scan.py --clear-progress
-```
-
----
-
-## Manual Position Management
-
-**⚠️ Note:** Position management requires manual execution. This is intentional for safety.
-
-### Step 1: Ensure Robinhood Username is Set
-
-In your `.env` file:
-
-```bash
-ROBINHOOD_USERNAME=your_email@example.com
-```
-
-**Important:** Password is NEVER stored. You will be prompted interactively.
-
-### Step 2: Run Position Manager
-
-```bash
-# Basic analysis (prompts for password + SMS MFA)
-python manage_positions.py
-
-# With entry dates for tax-aware recommendations
-python manage_positions.py --entry-dates entry_dates.json
-
-# Export report to file
-python manage_positions.py --export
-```
-
-### Step 3: Interactive Authentication
+## 프로젝트 구조
 
 ```
-Logging in to Robinhood...
-Robinhood password for you@example.com: ********
-
-MFA required - check your phone for SMS code from Robinhood
-Enter SMS code from Robinhood: 123456
-
-✓ Robinhood login successful with SMS MFA
-```
-
-### Step 4: Review Recommendations
-
-The tool will:
-- Fetch your current positions from Robinhood
-- Analyze each using **cached market data** (zero extra API calls)
-- Calculate phase, SMA levels, recent swing lows
-- Recommend stop loss adjustments using linear formulas
-
-### Example Output
-
-```
-================================================================================
-POSITION MANAGEMENT REPORT - STOP LOSS RECOMMENDATIONS
-Generated: 2025-12-06 10:30:15
-================================================================================
-
-PORTFOLIO SUMMARY
---------------------------------------------------------------------------------
-Total Positions: 3
-Need Stop Adjustment: 2
-Short-term (<1 year): 2
-Long-term (1+ years): 1
-Average Gain: +8.47%
-
-⚠️  URGENT ACTIONS NEEDED
---------------------------------------------------------------------------------
-
-NVDA (+10.10%)
-  • Big winner - consider taking partial profits
-
-================================================================================
-
-################################################################################
-POSITION #1: AAPL
-################################################################################
-Entry: $175.50 | Current: $182.30 | Gain: +3.87%
-Tax Treatment: SHORT_TERM
-Days Held: 45
-
-ACTION: HOLD
-
-RATIONALE:
-Position up 3.9% - hold initial stop. Wait for 5-10% gain before adjusting.
-
-Technical: Phase 2 | 50 SMA: $178.20
-
-################################################################################
-
-POSITION #2: NVDA
-################################################################################
-Entry: $495.00 | Current: $545.00 | Gain: +10.10%
-Tax Treatment: SHORT_TERM
-Days Held: 20
-
-ACTION: TRAIL TO PROFIT
-
-✓ RECOMMENDED STOP LOSS: $519.75
-
-RATIONALE:
-Position up 10.1% - TRAIL TO PROFIT
-
-  NEW STOP LOSS: $519.75
-    • Locks in minimum +5.0% profit
-    • Stop type: profit-based
-
-  Technical: Phase 2 | 50 SMA: $512.30
-
-################################################################################
-
-POSITION #3: MSFT
-################################################################################
-Entry: $380.00 | Current: $385.50 | Gain: +1.45%
-Tax Treatment: LONG_TERM
-Days Held: 400
-
-ACTION: HOLD
-
-RATIONALE:
-LONG-TERM HOLD (400 days) - Preserve long-term capital gains tax rate.
-No stop adjustment recommended.
-
-================================================================================
-```
-
-### Stop Loss Logic
-
-Recommendations use **linear formulas** (not buckets):
-
-| Gain Range | Recommendation | Stop Level |
-|------------|----------------|------------|
-| 0-5% | Hold initial stop | Original stop |
-| 5-10% | Trail to breakeven | Entry price |
-| 10-20% | Trail to profit | Entry × (1 + locked_profit_pct/100) |
-| 20-30% | Take 25-30% partial | Remaining at +10% profit |
-| 30%+ | Take 50% partial | Remaining at tight trail |
-
-**Locked profit % formula:**
-```python
-locked_profit_pct = min(gain_pct - 3, gain_pct * 0.5)
-```
-
-Examples:
-- 5% gain → Lock 2% profit
-- 10% gain → Lock 3.5% profit
-- 20% gain → Lock 8.5% profit
-- 40% gain → Lock 18.5% profit
-
-### Tax-Aware Filtering
-
-**Long-term positions (365+ days held)** are excluded from stop adjustments to preserve favorable capital gains tax treatment (15-20% vs ordinary income rate).
-
-To enable:
-
-1. Create `entry_dates.json`:
-```json
-{
-  "AAPL": "2024-10-18T00:00:00",
-  "NVDA": "2024-11-13T00:00:00",
-  "MSFT": "2023-05-10T00:00:00"
-}
-```
-
-2. Run with `--entry-dates`:
-```bash
-python manage_positions.py --entry-dates entry_dates.json
-```
-
----
-
-## Project Structure
-
-```
-stock-screener/
+SNP_momentum_screener/
+│
 ├── .github/
 │   └── workflows/
-│       └── daily_screening_git_storage.yml  # Automated daily scan
+│       └── daily_screening_git_storage.yml   # ← GitHub Actions 자동화
 │
-├── src/                                # Core library
+├── src/                                       # 핵심 라이브러리
 │   ├── data/
-│   │   ├── fetcher.py                  # YahooFinanceFetcher (price data)
-│   │   ├── fundamentals_fetcher.py     # Quarterly financials fetcher
-│   │   ├── git_storage_fetcher.py      # Smart cache (74% API reduction)
-│   │   ├── enhanced_fundamentals.py    # FMP integration (optional)
-│   │   ├── universe_fetcher.py         # NASDAQ/NYSE stock universe
-│   │   └── robinhood_positions.py      # Robinhood read-only API
+│   │   ├── fetcher.py                         # 가격 데이터 (yfinance)
+│   │   ├── fundamentals_fetcher.py            # 분기 실적 데이터
+│   │   ├── git_storage_fetcher.py             # 스마트 캐시 (74% API 절감)
+│   │   ├── sp500_fetcher.py                   # S&P 500 유니버스
+│   │   └── universe_fetcher.py                # 전체 시장 유니버스
 │   ├── screening/
-│   │   ├── phase_indicators.py         # 4-phase classification
-│   │   ├── signal_engine.py            # Buy/sell signal scoring
-│   │   ├── benchmark.py                # SPY analysis + market breadth
-│   │   └── optimized_batch_processor.py
+│   │   ├── phase_indicators.py                # 4단계 페이즈 분류
+│   │   ├── signal_engine.py                   # 매수·매도 신호 채점 (125점)
+│   │   ├── benchmark.py                       # SPY 분석 + 시장 폭
+│   │   └── optimized_batch_processor.py       # 병렬 스캔 처리
 │   └── analysis/
-│       └── position_manager.py         # Stop loss recommendations
+│       └── position_manager.py                # 포지션 관리 (손절 트레일링)
 │
-├── tests/                              # Test suite
-├── examples/                           # Demo scripts and sample configs
-├── scripts/                            # Utility runners and shell scripts
-├── assets/                             # Screenshots and images
-├── docs/                               # Extended documentation
+├── docs/                                      # GitHub Pages (자동 생성)
+│   ├── index.html                             # ← 메인 대시보드 (매일 업데이트)
+│   └── guide.html                             # ← 완전 가이드 (한국어)
 │
 ├── data/
-│   ├── fundamentals_cache/             # Git-tracked fundamentals (1,762 stocks)
-│   ├── daily_scans/                    # Historical scan reports
-│   └── position_reports/               # Position management reports
+│   ├── fundamentals_cache/                    # Git 기반 펀더멘털 캐시
+│   └── daily_scans/
+│       └── latest_scan_data.json              # 최신 스캔 결과 (JSON)
 │
-├── run_optimized_scan.py               # Main scanner CLI
-├── manage_positions.py                 # Position management CLI
-├── automated_position_report.py        # GitHub Actions position report
-├── run_screen.sh                       # Convenience wrapper (full scan)
-├── run_test.sh                         # Convenience wrapper (test scan)
+├── generate_html_report.py                    # JSON → HTML 변환기
+├── run_optimized_scan.py                      # 메인 스캐너 CLI
+├── manage_positions.py                        # 포지션 관리 CLI
 │
-├── config.yaml                         # Scan configuration
 ├── requirements.txt
-├── README.md
-├── CHANGELOG.md
-├── CONTRIBUTING.md
-└── LICENSE
+└── README.md
 ```
 
 ---
 
-## Technical Details
+## 자동화 파이프라인 (GitHub Actions)
 
-### Phase Classification Algorithm
+워크플로우 파일: [`.github/workflows/daily_screening_git_storage.yml`](.github/workflows/daily_screening_git_storage.yml)
 
-```python
-def classify_phase(price_data: pd.DataFrame, current_price: float) -> Dict:
-    """
-    Classifies stock into 4 phases based on SMA slopes and price position.
+### 실행 일정
 
-    Returns:
-        {
-            'phase': int (1-4),
-            'phase_name': str,
-            'confidence': float (0-100),
-            'sma_50': float,
-            'sma_200': float,
-            'slope_50': float (annualized),
-            'slope_200': float (annualized),
-            'reasons': List[str]
-        }
-    """
+| 조건 | 시각 |
+|------|------|
+| 자동 실행 | 매 평일 **12:00 UTC** (한국 시간 밤 9시, 미국 동부 오전 7시) |
+| 수동 실행 | GitHub Actions 탭 → `workflow_dispatch` |
+
+### 실행 단계
+
 ```
-
-**Logic:**
-1. Calculate 50-day and 200-day SMAs
-2. Calculate slopes (annualized % change rate)
-3. Classify phase based on:
-   - SMA ordering (50 > 200 or 50 < 200)
-   - Slope directions (rising, falling, or flat)
-   - Price position relative to SMAs
-4. Return phase with confidence score
-
-### Relative Strength Calculation
-
-```python
-def calculate_relative_strength(
-    stock_prices: pd.Series,
-    spy_prices: pd.Series,
-    period: int = 63
-) -> pd.Series:
-    """
-    Calculates smooth RS using linear regression slope.
-
-    Args:
-        stock_prices: Stock close prices
-        spy_prices: SPY close prices (benchmark)
-        period: Lookback window (63 days = 3 months)
-
-    Returns:
-        Series of RS slopes (annualized)
-    """
+1. 코드 체크아웃
+2. S&P 500 유니버스 로드 (~503개 종목)
+3. 가격 데이터 다운로드 (1년 OHLCV)
+4. 펀더멘털 캐시 확인 → 오래된 것만 갱신
+5. 페이즈 분류 + RS 계산 + VCP 탐지
+6. 매수·매도 신호 생성 및 채점
+7. latest_scan_data.json 저장
+8. generate_html_report.py → docs/index.html 생성
+9. 변경 사항 자동 커밋 + 푸시
+10. GitHub Pages 자동 배포
 ```
-
-**Formula:**
-```
-RS_ratio = stock_return / spy_return
-RS_slope = linear_regression_slope(RS_ratio, period)
-RS_score = clip((RS_slope + 0.3) / 0.6 * 10, 0, 10)
-```
-
-Interpretation:
-- RS slope +0.3 = 10 points (strong outperformance)
-- RS slope 0.0 = 5 points (matching market)
-- RS slope -0.3 = 0 points (strong underperformance)
-
-### Buy Signal Scoring (110 points max)
-
-| Component | Max Points | Criteria |
-|-----------|------------|----------|
-| **Phase** | 30 | Phase 2 = 30, Phase 1 = 20 |
-| **RS Momentum** | 10 | Linear scale from RS slope |
-| **Volume** | 10 | Breakout on high volume |
-| **Proximity to Breakout** | 10 | Close to resistance level |
-| **Fundamentals** | 50 | Growth (20) + Profitability (15) + Health (15) |
-
-**Threshold:** Buy signal score ≥ 70 for inclusion in report.
-
-### Sell Signal Scoring (110 points max)
-
-| Component | Max Points | Criteria |
-|-----------|------------|----------|
-| **Phase** | 30 | Phase 4 = 30, Phase 3 = 20 |
-| **RS Momentum** | 10 | Negative RS (underperformance) |
-| **Volume** | 10 | Breakdown on high volume |
-| **SMA Breakdown** | 15 | Broke below 50/200 SMA |
-| **Price Action** | 15 | Lower highs, lower lows |
-| **Severity** | 30 | Combination of above factors |
-
-**Threshold:** Sell signal score ≥ 60 for inclusion in report.
-
-### Stop Loss Calculation
-
-```python
-def calculate_stop_loss(
-    entry_price: float,
-    price_data: pd.DataFrame,
-    atr_period: int = 14,
-    atr_multiplier: float = 2.0
-) -> Dict:
-    """
-    Calculates stop loss using ATR or swing lows.
-
-    Returns:
-        {
-            'stop_price': float,
-            'risk_amount': float,
-            'stop_type': str ('atr' or 'swing_low')
-        }
-    """
-```
-
-**Method 1: ATR-Based**
-```
-ATR = Average True Range (14 days)
-Stop = Entry - (ATR × 2.0)
-```
-
-**Method 2: Swing Low-Based**
-```
-Swing_Low = Lowest low in last 20 days
-Stop = Swing_Low × 0.98  (2% buffer)
-```
-
-Uses whichever is **higher** (more conservative).
-
-### Risk/Reward Validation
-
-Every buy signal calculates:
-```python
-risk = entry_price - stop_loss
-reward = (entry_price × 1.20) - entry_price  # 20% target
-r_r_ratio = reward / risk
-```
-
-**Filter:** Only include signals with R:R ≥ 2:1.
 
 ---
 
-## Future Improvements
+## 로컬 실행 방법
 
-### Short-Term (Next 3 Months)
+### 요구사항
 
-- [ ] **Backtesting Engine**
-  - Simulate historical trades using phase transitions
-  - Calculate win rate, profit factor, max drawdown
-  - Optimize signal thresholds based on historical performance
-  - Compare against buy-and-hold SPY baseline
+- Python 3.11+
+- Git
 
-- [ ] **Enhanced Reporting**
-  - Add charts to daily report (SPY trend, market breadth, top signals)
-  - Email delivery with HTML formatting
-  - Slack integration with interactive buttons
-  - Web dashboard for historical tracking
+### 설치
 
-- [ ] **Smart Alerts**
-  - Real-time alerts when positions hit stop levels
-  - Notify when new high-score buy signals appear
-  - Alert on market regime changes (SPY phase transitions)
+```bash
+git clone https://github.com/tehryung-ray/SNP_momentum_screener.git
+cd SNP_momentum_screener
+python -m venv venv
+source venv/bin/activate      # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-### Medium-Term (3-6 Months)
+### 스캔 실행
 
-- [ ] **Multi-Timeframe Analysis**
-  - Add weekly phase classification (longer-term trend)
-  - Combine daily + weekly phases for higher-conviction signals
-  - Filter out counter-trend trades (daily bullish, weekly bearish)
+```bash
+# 보수적 스캔 (2 workers, 1.0s 딜레이) — 권장
+python run_optimized_scan.py --conservative --git-storage
 
-- [ ] **Sector Rotation**
-  - Track which sectors are leading/lagging
-  - Adjust signal thresholds based on sector strength
-  - Identify sector rotation opportunities
+# 기본 스캔 (3 workers, 0.5s 딜레이)
+python run_optimized_scan.py --git-storage
 
-- [ ] **Options Integration**
-  - Fetch option chain data for buy signals
-  - Recommend covered call strikes for profitable positions
-  - Identify protective put opportunities for Phase 3 stocks
+# 테스트 모드 (100개 종목만)
+python run_optimized_scan.py --test-mode
+```
 
-- [ ] **Paper Trading**
-  - Simulate trades in paper account
-  - Track P&L of generated signals
-  - Validate system performance before real capital
+### HTML 리포트 생성
 
-### Long-Term (6-12 Months)
+```bash
+python generate_html_report.py \
+    --input data/daily_scans/latest_scan_data.json \
+    --output docs/index.html
+```
 
-- [ ] **Machine Learning Enhancement**
-  - Train ML model on historical phase transitions
-  - Predict probability of Phase 1 → 2 breakout success
-  - Improve signal ranking using learned features
-
-- [ ] **Alternative Data Sources**
-  - Integrate insider trading data (SEC Form 4)
-  - Add institutional ownership changes (13F filings)
-  - Sentiment analysis from news/social media
-
-- [ ] **Portfolio Construction**
-  - Optimal position sizing based on volatility
-  - Correlation-based diversification
-  - Risk parity allocation across sectors
-
-- [ ] **Execution Optimization**
-  - Optimal entry timing (limit orders vs market orders)
-  - Partial entry strategies (scale in over multiple days)
-  - Bracket orders (auto-set stops and targets)
-
-### Infrastructure
-
-- [ ] **Database Migration**
-  - Move from file-based cache to PostgreSQL
-  - Enable complex queries (sector rotation, correlation analysis)
-  - Faster lookups for backtesting
-
-- [ ] **Real-Time Data**
-  - Integrate with real-time data provider (IEX Cloud, Polygon)
-  - Intraday phase classification (15-min bars)
-  - Live stop loss monitoring
-
-- [ ] **Web UI**
-  - Interactive dashboard for browsing signals
-  - Position tracker with live P&L
-  - Backtest explorer with equity curves
+그 후 브라우저에서 `docs/index.html`을 열어 결과를 확인합니다.
 
 ---
 
-## Contributing
+## 주의사항
 
-This project is currently a personal trading system. If you'd like to contribute:
+> **이 시스템은 교육 및 정보 제공 목적으로만 운영됩니다.**
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes with tests
-4. Commit (`git commit -m 'Add amazing feature'`)
-5. Push (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
-
-**Code Standards:**
-- Python 3.13+
-- Type hints required
-- Docstrings for all public functions
-- Black code formatting
-- pytest for tests (>80% coverage)
+- 특정 주식의 매수·매도를 권유하는 것이 **아닙니다**
+- 주식 투자에는 원금 손실 위험이 있습니다
+- 알고리즘 신호가 수익을 보장하지 않습니다
+- 과거 성과가 미래 결과를 보장하지 않습니다
+- 실제 투자 결정 전 공인 재무 전문가와 상담을 권장합니다
+- 데이터는 yfinance를 통해 수집되며 지연이나 오류가 있을 수 있습니다
 
 ---
 
-## License
+## 방법론 출처
 
-MIT License - See [LICENSE](LICENSE) file for details.
+이 시스템의 핵심 매수 신호 로직은 다음을 기반으로 합니다:
 
----
-
-## Disclaimer
-
-**This system is for educational and informational purposes only.**
-
-- Not financial advice
-- Past performance does not guarantee future results
-- Trading stocks involves risk of loss
-- Always do your own research
-- Never invest more than you can afford to lose
-- Consult a licensed financial advisor before making investment decisions
-
-The author is not responsible for any financial losses incurred using this system.
+- **Mark Minervini** — *"Trade Like a Stock Market Wizard"* (2013), *"Think & Trade Like a Champion"* (2017)  
+  SEPA(Specific Entry Point Analysis) 및 추세 템플릿 방법론
+- **Stan Weinstein** — *"Secrets for Profiting in Bull and Bear Markets"* (1988)  
+  4단계 시장 사이클 분석
+- **William O'Neil** — CANSLIM 방법론의 기초체력 스크리닝 개념
 
 ---
 
-## Contact
+## 라이선스
 
-**Ryan Hamby**
-GitHub: [github.com/RyanJHamby](https://github.com/RyanJHamby)
-LinkedIn: [linkedin.com/in/ryanhamby](https://linkedin.com/in/ryanhamby)
+MIT License — [LICENSE](LICENSE) 파일 참조
 
 ---
 
