@@ -8,7 +8,7 @@
 
 ---
 
-**🌐 [라이브 대시보드](https://tehryung-ray.github.io/SNP_momentum_screener/) · 📖 [완전 가이드](https://tehryung-ray.github.io/SNP_momentum_screener/guide.html)**
+**🌐 [라이브 대시보드](https://tehryung-ray.github.io/SNP_momentum_screener/) · 📖 [사용설명서](https://tehryung-ray.github.io/SNP_momentum_screener/guide.html)**
 
 ---
 
@@ -64,10 +64,11 @@
 
 각 매수 신호 카드에는 다음 정보가 포함됩니다:
 
+- **섹터 뱃지** — GICS 11개 섹터 색상 레이블 (IT, 헬스, 금융, 에너지 등)
+- **3단 가격 박스** — 종가 / 손절가(빨강) / 익절가(초록) 한눈에 비교
 - **미너비니 기준 통과율** (녹색 점 8개)
-- **손절가** / **손익비** / **돌파가**
-- **RS 기울기** / **거래량 배수** / **진입 품질**
-- **WM 점수** (가중모멘텀)
+- **손익비** / **RS 기울기** / **거래량 배수** / **진입 품질** / **WM 점수**
+- **돌파가** (존재 시)
 - **VCP 패턴** 감지 여부 및 강도
 - 매수 근거 상세 설명
 
@@ -82,6 +83,19 @@
 ### 📈 상대 강도 (RS) 스코어링
 
 63일(3개월) 선형 회귀 기울기로 SPY 대비 초과 성과를 부드러운 연속 값으로 산출합니다. 이진 pass/fail이 아닌 연속 점수 방식으로 인위적 경계를 제거했습니다.
+
+### 🏷️ GICS 섹터 뱃지
+
+매수·매도 카드의 티커 옆에 GICS 기준 11개 섹터 레이블을 색상 뱃지로 표시합니다. 특정 섹터에 신호가 집중되면 시장 테마를 빠르게 파악할 수 있습니다.
+
+| 뱃지 | 섹터 | 뱃지 | 섹터 |
+|------|------|------|------|
+| `IT` | 정보기술 | `헬스` | 헬스케어 |
+| `금융` | 금융 | `임의소비` | 임의소비재 |
+| `통신` | 통신서비스 | `필수소비` | 필수소비재 |
+| `산업재` | 산업재 | `에너지` | 에너지 |
+| `소재` | 소재 | `유틸` | 유틸리티 |
+| `리츠` | 부동산 | | |
 
 ### 💰 기초체력 (펀더멘털) 분석
 
@@ -222,7 +236,7 @@ graph TB
         K --> N
         N --> O[HTML 리포트 생성<br/>generate_html_report.py]
         O --> P[docs/index.html<br/>한국어 웹 대시보드]
-        O --> Q[docs/guide.html<br/>완전 가이드]
+        O --> Q[docs/guide.html<br/>사용설명서]
     end
 
     subgraph "자동화"
@@ -264,7 +278,7 @@ SNP_momentum_screener/
 │
 ├── docs/                                      # GitHub Pages (자동 생성)
 │   ├── index.html                             # ← 메인 대시보드 (매일 업데이트)
-│   └── guide.html                             # ← 완전 가이드 (한국어)
+│   └── guide.html                             # ← 사용설명서 (한국어)
 │
 ├── data/
 │   ├── fundamentals_cache/                    # Git 기반 펀더멘털 캐시

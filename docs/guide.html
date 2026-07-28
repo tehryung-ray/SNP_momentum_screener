@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>스크리너 완전 가이드 — S&P 500 미너비니 스크리너</title>
+<title>스크리너 사용설명서 — S&P 500 미너비니 스크리너</title>
 <style>
 /* ── 토큰 ──────────────────────────────────────────────── */
 :root {
@@ -413,7 +413,7 @@ img { max-width: 100%; }
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
     대시보드로 돌아가기
   </a>
-  <span class="header-title">📖 스크리너 완전 가이드</span>
+  <span class="header-title">📖 스크리너 사용설명서</span>
   <button class="theme-btn" onclick="toggleTheme()" title="테마 전환">☀️</button>
 </header>
 
@@ -444,7 +444,7 @@ img { max-width: 100%; }
 
     <!-- 히어로 -->
     <div class="hero">
-      <div class="hero-eyebrow">완전 가이드</div>
+      <div class="hero-eyebrow">사용설명서</div>
       <h1>이 대시보드의 모든 것을<br>쉽게 설명해 드릴게요</h1>
       <p>중학생도 이해할 수 있게 주식의 기초부터, 각 지표의 의미와 계산 방법까지 하나씩 설명합니다.</p>
       <div class="pill-row">
@@ -712,7 +712,48 @@ img { max-width: 100%; }
       <div class="section-label" style="color:var(--green)">07 — 지표</div>
       <h2>카드에 표시되는 각 지표 설명</h2>
 
+      <p>매수 신호 카드는 아래와 같이 구성됩니다. 핵심 가격 3개를 한눈에 비교하고, 하단에 세부 지표를 확인하세요.</p>
+
+      <!-- 카드 레이아웃 미리보기 -->
+      <div class="card" style="max-width:380px;margin:0 auto 28px;font-family:monospace">
+        <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:10px">
+          <div style="font-size:18px;font-weight:900;color:#60a5fa">AAPL</div>
+          <span style="font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid #60a5fa44;background:#60a5fa22;color:#60a5fa;font-weight:700;letter-spacing:.3px">IT</span>
+          <span style="font-size:10px;padding:2px 7px;border-radius:4px;background:#22c55e22;color:#22c55e;font-weight:700;margin-left:auto">⭐ Phase 2</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0">
+          <div style="background:#0f172a;border-radius:8px;padding:8px 10px;text-align:center">
+            <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px">종가</div>
+            <div style="font-size:15px;font-weight:800">$215.32</div>
+          </div>
+          <div style="background:#0f172a;border-radius:8px;padding:8px 10px;text-align:center;border:1px solid #ef444444">
+            <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px">손절가</div>
+            <div style="font-size:15px;font-weight:800;color:#ef4444">$193.79</div>
+          </div>
+          <div style="background:#0f172a;border-radius:8px;padding:8px 10px;text-align:center;border:1px solid #22c55e44">
+            <div style="font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px">익절가</div>
+            <div style="font-size:15px;font-weight:800;color:#22c55e">$279.92</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:8px;font-size:11px;text-align:center;color:#94a3b8">
+          <div><div style="color:#fff;font-weight:700">3.0:1</div>손익비</div>
+          <div><div style="color:#22c55e;font-weight:700">+0.38</div>RS기울기</div>
+          <div><div style="color:#22c55e;font-weight:700">1.8×</div>거래량</div>
+          <div><div style="color:#22c55e;font-weight:700">좋음</div>진입품질</div>
+          <div><div style="color:#60a5fa;font-weight:700">84.2</div>WM</div>
+        </div>
+        <div style="font-size:11px;color:#64748b">돌파가: $218.50</div>
+      </div>
+
       <div class="indicator-grid">
+
+        <div class="ind-card">
+          <div class="ind-icon">💰</div>
+          <div class="ind-name">종가</div>
+          <div class="ind-title">Current Price</div>
+          <div class="ind-body">스캔 당시의 <strong>주가</strong>입니다. 이 가격에서 손절가까지의 거리가 리스크이고, 익절가까지의 거리가 목표 수익이에요.</div>
+          <div class="ind-example">예) 종가 $215 → 이 가격 근처에서 매수 진입 고려</div>
+        </div>
 
         <div class="ind-card">
           <div class="ind-icon">🛑</div>
@@ -723,11 +764,33 @@ img { max-width: 100%; }
         </div>
 
         <div class="ind-card">
+          <div class="ind-icon">🎯</div>
+          <div class="ind-name">익절가</div>
+          <div class="ind-title">Take Profit Target</div>
+          <div class="ind-body">목표 수익 달성 시 <strong>이익을 실현하며 파는 가격</strong>이에요. 종가 기준 약 <strong>30% 상승</strong>한 가격으로 설정됩니다 (손익비 3:1 기준).</div>
+          <div class="ind-example">예) 익절가 $280 → 종가 $215 대비 약 +30% 수익</div>
+        </div>
+
+        <div class="ind-card">
           <div class="ind-icon">⚖️</div>
           <div class="ind-name">손익비</div>
           <div class="ind-title">R:R Ratio (Risk:Reward)</div>
           <div class="ind-body">잃을 수 있는 금액 대비 벌 수 있는 금액의 비율이에요. <strong>최소 2:1 이상</strong>이어야 합니다.</div>
           <div class="ind-example">예) 3:1 → 1만원을 잃을 위험이 있을 때, 3만원을 벌 수 있다는 뜻</div>
+        </div>
+
+        <div class="ind-card">
+          <div class="ind-icon">🏷️</div>
+          <div class="ind-name">섹터 뱃지</div>
+          <div class="ind-title">GICS Sector Badge</div>
+          <div class="ind-body">티커 옆에 표시되는 <strong>산업 분류</strong>입니다. GICS(글로벌 산업분류기준) 11개 섹터로 구분되며, 섹터별로 색상이 다릅니다. 특정 섹터에 신호가 몰리면 테마·트렌드를 읽을 수 있어요.</div>
+          <div class="ind-example">
+            <span style="font-size:10px;padding:2px 6px;border-radius:4px;border:1px solid #60a5fa44;background:#60a5fa22;color:#60a5fa;font-weight:700">IT</span>
+            <span style="font-size:10px;padding:2px 6px;border-radius:4px;border:1px solid #34d39944;background:#34d39922;color:#34d399;font-weight:700;margin:0 3px">헬스</span>
+            <span style="font-size:10px;padding:2px 6px;border-radius:4px;border:1px solid #fbbf2444;background:#fbbf2422;color:#fbbf24;font-weight:700">금융</span>
+            <span style="font-size:10px;padding:2px 6px;border-radius:4px;border:1px solid #f9731644;background:#f9731622;color:#f97316;font-weight:700;margin:0 3px">에너지</span>
+            <span style="font-size:10px;padding:2px 6px;border-radius:4px;border:1px solid #a78bfa44;background:#a78bfa22;color:#a78bfa;font-weight:700">통신</span>
+          </div>
         </div>
 
         <div class="ind-card">
@@ -755,7 +818,7 @@ img { max-width: 100%; }
         </div>
 
         <div class="ind-card">
-          <div class="ind-icon">🎯</div>
+          <div class="ind-icon">✅</div>
           <div class="ind-name">진입 품질</div>
           <div class="ind-title">Entry Quality</div>
           <div class="ind-body">지금이 매수하기 좋은 타이밍인지 평가합니다.</div>
