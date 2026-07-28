@@ -127,8 +127,11 @@ def _render_buy_card(sig: dict, rank: int) -> str:
     rs = details.get("rs_slope")
     vol = details.get("volume_ratio")
     risk_amt = details.get("risk_amount")
-    reward_amt = details.get("reward_amount")
+    reward_target = details.get("reward_target")
     vcp = details.get("vcp_data")
+
+    # 종가 = 손절가 + 리스크금액으로 역산
+    current_price = round(stop + risk_amt, 2) if stop and risk_amt else None
 
     sc = _score_class(score, 125)
     eq_kr = _tr_entry_quality(eq)
@@ -143,20 +146,18 @@ def _render_buy_card(sig: dict, rank: int) -> str:
     eq_color = "#22c55e" if eq == "Good" else "#eab308" if eq == "Extended" else "#ef4444"
     eq_badge = f'<span class="tag" style="color:{eq_color};border-color:{eq_color}44">{_e(eq_kr)}</span>' if eq else ""
 
-    stop_str = f"${stop:.2f}" if stop else "—"
+    price_str  = f"${current_price:.2f}" if current_price else "—"
+    stop_str   = f"${stop:.2f}" if stop else "—"
+    target_str = f"${reward_target:.2f}" if reward_target else "—"
     rr_str = f"{rr:.1f}:1" if rr else "—"
     rr_color = "#22c55e" if rr >= 3 else "#eab308" if rr >= 2 else "#ef4444"
     rs_str = f"{rs:+.3f}" if rs is not None else "—"
     rs_color = "#22c55e" if (rs or 0) > 0.1 else "#eab308" if (rs or 0) > 0 else "#ef4444"
     vol_str = f"{vol:.1f}×" if vol else "—"
     vol_color = "#22c55e" if (vol or 0) >= 1.5 else "#eab308" if (vol or 0) >= 1 else "#ef4444"
-    bp_str = f"${bp:.2f}" if bp else "—"
     wm_str = f"{wm:+.2f}" if wm is not None else "—"
     wm_color = "#22c55e" if (wm or 0) > 1.0 else "#eab308" if (wm or 0) > 0 else "#ef4444"
-
-    risk_reward_detail = ""
-    if risk_amt and reward_amt:
-        risk_reward_detail = f"<div class='rr-detail'>리스크 ${risk_amt:.2f} → 목표 ${reward_amt:.2f}</div>"
+    bp_line = f'<div class="bp-line">돌파가 <span>${bp:.2f}</span></div>' if bp else ""
 
     return f"""
 <div class="card buy-card">
@@ -176,18 +177,25 @@ def _render_buy_card(sig: dict, rank: int) -> str:
 
   <div class="badges">{vcp_badge}{eq_badge}</div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">{stop_str}</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">{price_str}</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">{stop_str}</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">{target_str}</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:{rr_color}">{rr_str}</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">{bp_str}</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -201,12 +209,12 @@ def _render_buy_card(sig: dict, rank: int) -> str:
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:{eq_color}">{_e(eq_kr) or '—'}</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:{wm_color}">{wm_str}</div>
     </div>
   </div>
-  {risk_reward_detail}
+  {bp_line}
   {_render_reasons(sig.get("reasons", []))}
 </div>"""
 
@@ -424,15 +432,19 @@ a{{color:var(--blue);text-decoration:none}}
 .badges{{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}}
 .tag{{font-size:11px;padding:2px 7px;border-radius:10px;border:1px solid;font-weight:600}}
 
+/* Price row (종가 / 손절가 / 익절가) */
+.price-row{{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0}}
+.price-box{{background:#0f172a;border-radius:8px;padding:8px 10px;text-align:center}}
+.p-label{{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}}
+.p-value{{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.3px}}
+
 /* Metrics */
-.metrics{{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}}
+.metrics{{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:8px}}
 .metric{{background:#0f172a;border-radius:6px;padding:6px 8px}}
-.metric--wm{{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;flex-direction:row}}
-.metric--wm .m-label{{margin-bottom:0}}
-.metric--wm .m-value{{font-size:15px}}
 .m-label{{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}}
-.m-value{{font-size:13px;font-weight:700;margin-top:1px}}
-.rr-detail{{font-size:11px;color:var(--muted);margin-bottom:8px}}
+.m-value{{font-size:12px;font-weight:700;margin-top:2px}}
+.bp-line{{font-size:11px;color:var(--muted);margin-bottom:8px}}
+.bp-line span{{color:var(--text);font-weight:700}}
 
 /* Reasons */
 .reasons{{list-style:none;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:8px;margin-top:8px}}
@@ -450,7 +462,8 @@ a{{color:var(--blue);text-decoration:none}}
   .hdr{{padding:12px 14px}}
   .grid{{grid-template-columns:1fr}}
   .stats-row{{grid-template-columns:repeat(2,1fr)}}
-  .metrics{{grid-template-columns:repeat(2,1fr)}}
+  .price-row{{grid-template-columns:repeat(3,1fr)}}
+  .metrics{{grid-template-columns:repeat(3,1fr)}}
   .spy-top{{flex-direction:column}}
 }}
 .ad-banner{{text-align:center;margin:16px 0;overflow:hidden}}

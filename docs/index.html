@@ -95,15 +95,19 @@ a{color:var(--blue);text-decoration:none}
 .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
 .tag{font-size:11px;padding:2px 7px;border-radius:10px;border:1px solid;font-weight:600}
 
+/* Price row (종가 / 손절가 / 익절가) */
+.price-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0}
+.price-box{background:#0f172a;border-radius:8px;padding:8px 10px;text-align:center}
+.p-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.p-value{font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.3px}
+
 /* Metrics */
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:8px}
 .metric{background:#0f172a;border-radius:6px;padding:6px 8px}
-.metric--wm{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;flex-direction:row}
-.metric--wm .m-label{margin-bottom:0}
-.metric--wm .m-value{font-size:15px}
 .m-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
-.m-value{font-size:13px;font-weight:700;margin-top:1px}
-.rr-detail{font-size:11px;color:var(--muted);margin-bottom:8px}
+.m-value{font-size:12px;font-weight:700;margin-top:2px}
+.bp-line{font-size:11px;color:var(--muted);margin-bottom:8px}
+.bp-line span{color:var(--text);font-weight:700}
 
 /* Reasons */
 .reasons{list-style:none;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:8px;margin-top:8px}
@@ -121,7 +125,8 @@ a{color:var(--blue);text-decoration:none}
   .hdr{padding:12px 14px}
   .grid{grid-template-columns:1fr}
   .stats-row{grid-template-columns:repeat(2,1fr)}
-  .metrics{grid-template-columns:repeat(2,1fr)}
+  .price-row{grid-template-columns:repeat(3,1fr)}
+  .metrics{grid-template-columns:repeat(3,1fr)}
   .spy-top{flex-direction:column}
 }
 .ad-banner{text-align:center;margin:16px 0;overflow:hidden}
@@ -244,18 +249,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$58.38</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$62.13</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$58.38</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$80.77</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">5.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -269,12 +281,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+2.35</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $3.75 → 목표 $18.64</div>
+  
   <ul class='reasons'><li>Strong Stage 2: 10.5% above 50 SMA</li><li>SMAs rising strongly (50:0.290, 200:0.092)</li><li>🔴 Revenue: 3Q avg nan% QoQ (11.0% → -2.9% → nan%)</li><li>🟢 EPS: +36% YoY</li><li>Volume slightly heavier on up days (ratio 1.27)</li><li>✓ Strong RS: 0.421 (outperforming SPY)</li></ul>
 </div>
 <div class="card buy-card">
@@ -294,18 +306,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$61.52</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$63.49</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$61.52</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$82.54</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">9.7:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -319,12 +338,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.93</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $1.97 → 목표 $19.05</div>
+  
   <ul class='reasons'><li>Good Stage 2: 8.5% above 50 SMA</li><li>SMAs rising strongly (50:0.257, 200:0.147)</li><li>🔴 Revenue: 3Q avg nan% QoQ (0.5% → -1.0% → nan%)</li><li>🟢 EPS: +22% YoY</li><li>Volume slightly heavier on up days (ratio 1.26)</li><li>✓ Strong RS: 0.286 (outperforming SPY)</li></ul>
 </div>
 <div class="card buy-card">
@@ -344,18 +363,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="background:#eab30822;color:#eab308;border-color:#eab30844">⭐ VCP 55/100</span><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$141.74</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$147.26</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$141.74</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$191.44</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">8.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -369,12 +395,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.49</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $5.52 → 목표 $44.18</div>
+  
   <ul class='reasons'><li>Weak Stage 2: 2.9% above 50 SMA</li><li>SMAs rising moderately</li><li>🔴 Revenue: 3Q avg nan% QoQ (1.8% → 2.0% → nan%)</li><li>🟢 EPS: +85% YoY (strong earnings)</li><li>Volume pattern neutral (ratio 1.06)</li><li>✓ Strong RS: 0.464 (outperforming SPY)</li></ul>
 </div>
 <div class="card buy-card">
@@ -394,18 +420,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$324.12</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$356.20</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$324.12</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$463.06</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">3.3:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -419,12 +452,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+2.09</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $32.08 → 목표 $106.86</div>
+  
   <ul class='reasons'><li>Strong Stage 2: 10.4% above 50 SMA</li><li>SMAs rising strongly (50:0.201, 200:0.055)</li><li>🔴 Revenue: 3Q avg nan% QoQ (-1.4% → 8.8% → nan%)</li><li>🟢 EPS: +47% YoY</li><li>Volume pattern neutral (ratio 1.00)</li><li>✓ Strong RS: 0.411 (outperforming SPY)</li></ul>
 </div>
 <div class="card buy-card">
@@ -444,18 +477,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$48.67</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$51.80</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$48.67</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$67.34</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">5.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -469,12 +509,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+3.03</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $3.13 → 목표 $15.54</div>
+  
   <ul class='reasons'><li>Good Stage 2: 8.5% above 50 SMA</li><li>SMAs rising strongly (50:0.217, 200:0.201)</li><li>🟡 Revenue: 3Q avg 3.4% QoQ (-2.2% → -0.7% → 13.0%)</li><li>🟢 EPS: +23% YoY</li><li>✓ Inventory drawing (-7.5% QoQ - strong demand)</li><li>✓ Volume heavier on up days (20.2M vs 15.3M, ratio 1.32)</li></ul>
 </div>
 <div class="card buy-card">
@@ -494,18 +534,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$262.96</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$278.83</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$262.96</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$362.48</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">5.3:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -519,12 +566,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+5.72</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $15.87 → 목표 $83.65</div>
+  
   <ul class='reasons'><li>Strong Stage 2: 11.0% above 50 SMA</li><li>SMAs rising strongly (50:0.539, 200:0.193)</li><li>🟢 Revenue: 3Q avg 5.6% QoQ (11.2% → -3.5% → 9.0%)</li><li>🟢 EPS: +294% YoY (strong earnings)</li><li>Volume pattern neutral (ratio 1.01)</li><li>🟢 Outstanding R/R: 5.3:1 ($83.65 upside, $15.87 risk)</li></ul>
 </div>
 <div class="card buy-card">
@@ -544,18 +591,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$1128.73</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$1197.53</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$1128.73</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$1556.79</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">5.2:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -569,12 +623,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+2.93</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $68.80 → 목표 $359.26</div>
+  
   <ul class='reasons'><li>Good Stage 2: 5.7% above 50 SMA</li><li>SMAs rising strongly (50:0.468, 200:0.214)</li><li>🟢 Revenue: 3Q avg 8.5% QoQ (13.1% → 9.6% → 2.6%)</li><li>🟢 EPS: +170% YoY (strong earnings)</li><li>⚠ Inventory building (5.7% QoQ)</li><li>Volume slightly heavier on up days (ratio 1.22)</li></ul>
 </div>
 <div class="card buy-card">
@@ -594,18 +648,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$208.12</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$214.56</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$208.12</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$278.93</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">10.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -619,12 +680,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.20</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $6.44 → 목표 $64.37</div>
+  
   <ul class='reasons'><li>Weak Stage 2: 0.7% above 50 SMA</li><li>SMAs rising strongly (50:0.287, 200:0.177)</li><li>🔴 Revenue: 3Q avg nan% QoQ (-1.9% → 15.3% → nan%)</li><li>🟢 EPS: +62% YoY (strong earnings)</li><li>Volume slightly heavier on up days (ratio 1.15)</li><li>Positive RS: 0.064</li></ul>
 </div>
 <div class="card buy-card">
@@ -644,18 +705,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$1016.78</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$1048.23</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$1016.78</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$1362.70</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">10.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -669,12 +737,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#eab308">+0.91</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $31.45 → 목표 $314.47</div>
+  
   <ul class='reasons'><li>Weak Stage 2: 0.7% above 50 SMA</li><li>SMAs rising strongly (50:0.288, 200:0.159)</li><li>🔴 Revenue: 3Q avg nan% QoQ (-11.4% → 28.0% → nan%)</li><li>🟢 EPS: +92% YoY (strong earnings)</li><li>⚠ Volume heavier on down days (ratio 0.80 - distribution)</li><li>✓ Strong RS: 0.363 (outperforming SPY)</li></ul>
 </div>
 <div class="card buy-card">
@@ -694,18 +762,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$196.58</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$218.42</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$196.58</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$283.95</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">3.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -719,12 +794,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+3.76</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $21.84 → 목표 $65.53</div>
+  
   <ul class='reasons'><li>Strong Stage 2: 16.8% above 50 SMA</li><li>SMAs rising strongly (50:0.227, 200:0.100)</li><li>🟡 Revenue: 3Q avg 3.6% QoQ (7.8% → -8.9% → 11.9%)</li><li>🟢 EPS: +29% YoY</li><li>Inventory neutral (1.8% QoQ)</li><li>✓ Volume heavier on up days (7.3M vs 3.5M, ratio 2.07)</li></ul>
 </div>
 <div class="card buy-card">
@@ -744,18 +819,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="background:#22c55e22;color:#22c55e;border-color:#22c55e44">⭐ VCP 85/100</span><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$180.61</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$195.66</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$180.61</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$254.36</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">3.9:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">$184.69</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -769,12 +851,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+2.49</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $15.05 → 목표 $58.70</div>
+  <div class="bp-line">돌파가 <span>$184.69</span></div>
   <ul class='reasons'><li>Good Stage 2: 7.2% above 50 SMA</li><li>SMAs rising strongly (50:0.221, 200:0.088)</li><li>🟡 VCP Breakout (2 contractions) (low volume)</li><li>🟡 Revenue: 3Q avg 1.3% QoQ (-4.5% → -2.1% → 10.3%)</li><li>🔴 EPS: -8% YoY</li><li>Inventory neutral (0.4% QoQ)</li></ul>
 </div>
 <div class="card buy-card">
@@ -794,18 +876,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="background:#eab30822;color:#eab308;border-color:#eab30844">⭐ VCP 76/100</span><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$332.37</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$358.91</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$332.37</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$466.58</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">4.1:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">$332.99</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -819,12 +908,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.91</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $26.54 → 목표 $107.67</div>
+  <div class="bp-line">돌파가 <span>$332.99</span></div>
   <ul class='reasons'><li>Good Stage 2: 7.5% above 50 SMA</li><li>SMAs rising strongly (50:0.155, 200:0.120)</li><li>🟡 VCP Breakout (5 contractions) (low volume)</li><li>🔴 Revenue: 3Q avg nan% QoQ (-5.5% → -3.2% → nan%)</li><li>🔴 EPS: -1% YoY</li><li>⚠ Volume heavier on down days (ratio 0.44 - distribution)</li></ul>
 </div>
 <div class="card buy-card">
@@ -844,18 +933,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$242.15</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$249.64</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$242.15</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$324.53</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">10.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -869,12 +965,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.51</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $7.49 → 목표 $74.89</div>
+  
   <ul class='reasons'><li>Good Stage 2: 6.3% above 50 SMA</li><li>SMAs rising strongly (50:0.272, 200:0.130)</li><li>🔴 Revenue: 3Q avg nan% QoQ (2.8% → 1.5% → nan%)</li><li>🟢 EPS: +25% YoY</li><li>Volume pattern neutral (ratio 1.08)</li><li>✓ Strong RS: 0.130 (outperforming SPY)</li></ul>
 </div>
 <div class="card buy-card">
@@ -894,18 +990,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$578.44</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$625.02</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$578.44</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$812.53</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">4.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -919,12 +1022,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.05</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $46.58 → 목표 $187.51</div>
+  
   <ul class='reasons'><li>Good Stage 2: 7.0% above 50 SMA</li><li>SMAs rising strongly (50:0.078, 200:0.129)</li><li>🟢 Revenue: 3Q avg 6.7% QoQ (2.6% → -22.7% → 40.1%)</li><li>🔴 EPS: -1% YoY</li><li>Inventory neutral (-1.2% QoQ)</li><li>✓ Volume heavier on up days (1.1M vs 0.9M, ratio 1.31)</li></ul>
 </div>
 <div class="card buy-card">
@@ -944,18 +1047,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$369.72</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$381.15</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$369.72</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$495.49</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">10.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -969,12 +1079,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+4.86</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $11.43 → 목표 $114.34</div>
+  
   <ul class='reasons'><li>Good Stage 2: 5.3% above 50 SMA</li><li>SMAs rising strongly (50:0.964, 200:0.272)</li><li>🟢 Revenue: 3Q avg 7.4% QoQ (0.8% → -0.4% → 21.9%)</li><li>🔴 EPS: -5% YoY</li><li>⚠ Volume heavier on down days (ratio 0.73 - distribution)</li><li>Neutral RS: -0.026</li></ul>
 </div>
 <div class="card buy-card">
@@ -994,18 +1104,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="background:#eab30822;color:#eab308;border-color:#eab30844">⭐ VCP 74/100</span><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$270.42</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$278.78</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$270.42</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$362.41</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">10.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">$277.05</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1019,12 +1136,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+2.23</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $8.36 → 목표 $83.63</div>
+  <div class="bp-line">돌파가 <span>$277.05</span></div>
   <ul class='reasons'><li>Good Stage 2: 4.5% above 50 SMA</li><li>SMAs rising strongly (50:0.263, 200:0.089)</li><li>🟡 VCP Breakout (2 contractions) (low volume)</li><li>🔴 Revenue: Recent decline -22.7% QoQ (3Q avg: 8.9%, PENALTY)</li><li>🟢 EPS: +22% YoY</li><li>⚠ Inventory building (14.8% QoQ)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1044,18 +1161,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$335.79</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$361.61</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$335.79</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$470.09</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">4.2:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1069,12 +1193,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.61</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $25.82 → 목표 $108.48</div>
+  
   <ul class='reasons'><li>Good Stage 2: 6.6% above 50 SMA</li><li>SMAs rising strongly (50:0.405, 200:0.097)</li><li>🟡 Revenue: 3Q avg 3.2% QoQ (4.4% → -2.6% → 7.7%)</li><li>🟡 EPS: +20% YoY</li><li>Inventory neutral (0.6% QoQ)</li><li>Volume pattern neutral (ratio 0.94)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1094,18 +1218,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$244.26</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$265.95</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$244.26</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$345.74</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">3.7:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1119,12 +1250,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+2.79</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $21.69 → 목표 $79.79</div>
+  
   <ul class='reasons'><li>Good Stage 2: 9.7% above 50 SMA</li><li>SMAs rising strongly (50:0.263, 200:0.181)</li><li>🟡 Revenue: 3Q avg 1.8% QoQ (2.4% → -2.0% → 5.2%)</li><li>🔴 EPS: -1% YoY</li><li>Inventory neutral (3.9% QoQ)</li><li>Volume pattern neutral (ratio 1.00)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1144,18 +1275,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="background:#eab30822;color:#eab308;border-color:#eab30844">⭐ VCP 51/100</span><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$123.93</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$128.83</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$123.93</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$167.48</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">7.9:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1169,12 +1307,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#eab308">+0.59</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $4.90 → 목표 $38.65</div>
+  
   <ul class='reasons'><li>Weak Stage 2: 2.9% above 50 SMA</li><li>SMAs rising weakly</li><li>🟢 Revenue: 3Q avg 7.4% QoQ (13.8% → -7.1% → 15.6%)</li><li>🟡 EPS: +12% YoY</li><li>Inventory neutral (0.1% QoQ)</li><li>Volume slightly heavier on up days (ratio 1.16)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1194,18 +1332,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$405.11</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$417.64</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$405.11</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$542.93</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">10.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1219,12 +1364,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.71</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $12.53 → 목표 $125.29</div>
+  
   <ul class='reasons'><li>Weak Stage 2: 2.6% above 50 SMA</li><li>SMAs rising strongly (50:0.316, 200:0.129)</li><li>🟡 Revenue: 3Q avg 0.0% QoQ (1.4% → 0.0% → -1.3%)</li><li>🟡 EPS: +1% YoY</li><li>✓ Volume heavier on up days (6.8M vs 4.4M, ratio 1.56)</li><li>Positive RS: 0.064</li></ul>
 </div>
 <div class="card buy-card">
@@ -1244,18 +1389,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$119.88</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$130.76</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$119.88</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$169.99</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">3.6:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1269,12 +1421,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+2.28</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $10.88 → 목표 $39.23</div>
+  
   <ul class='reasons'><li>Good Stage 2: 8.0% above 50 SMA</li><li>SMAs rising strongly (50:0.248, 200:0.213)</li><li>🟡 Revenue: 3Q avg 1.2% QoQ (9.3% → -5.1% → -0.7%)</li><li>🔴 EPS: -186% YoY</li><li>Inventory neutral (-2.7% QoQ)</li><li>Volume pattern neutral (ratio 1.08)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1294,18 +1446,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$416.63</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$429.52</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$416.63</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$558.38</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">10.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1319,12 +1478,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+2.49</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $12.89 → 목표 $128.86</div>
+  
   <ul class='reasons'><li>Weak Stage 2: 2.0% above 50 SMA</li><li>SMAs rising strongly (50:0.573, 200:0.058)</li><li>🟡 Revenue: 3Q avg 1.6% QoQ (-11.4% → -10.1% → 26.1%)</li><li>🔴 EPS: -3% YoY</li><li>Inventory neutral (-4.7% QoQ)</li><li>⚠ Volume heavier on down days (ratio 0.85 - distribution)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1344,18 +1503,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="background:#eab30822;color:#eab308;border-color:#eab30844">⭐ VCP 54/100</span><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$93.40</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$96.48</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$93.40</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$125.42</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">9.4:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1369,12 +1535,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#eab308">+0.52</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $3.08 → 목표 $28.94</div>
+  
   <ul class='reasons'><li>Weak Stage 2: 2.3% above 50 SMA</li><li>SMAs rising strongly (50:0.051, 200:0.025)</li><li>🟢 Revenue: 3Q avg 7.2% QoQ (12.2% → -10.8% → 20.3%)</li><li>🔴 EPS: -1% YoY</li><li>Inventory neutral (-4.9% QoQ)</li><li>Volume pattern neutral (ratio 1.00)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1394,18 +1560,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="background:#eab30822;color:#eab308;border-color:#eab30844">⭐ VCP 51/100</span><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$80.43</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$84.07</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$80.43</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$109.29</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">6.9:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1419,12 +1592,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.55</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $3.64 → 목표 $25.22</div>
+  
   <ul class='reasons'><li>Good Stage 2: 3.5% above 50 SMA</li><li>SMAs rising strongly (50:0.142, 200:0.121)</li><li>🔴 Revenue: 3Q avg -0.1% QoQ (-0.6% → -5.1% → 5.5%)</li><li>🟡 EPS: +18% YoY</li><li>⚠ Inventory building (6.9% QoQ)</li><li>Volume pattern neutral (ratio 1.09)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1444,18 +1617,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="background:#eab30822;color:#eab308;border-color:#eab30844">⭐ VCP 56/100</span><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$359.43</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$389.14</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$359.43</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$505.88</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">3.9:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1469,12 +1649,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+2.92</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $29.71 → 목표 $116.74</div>
+  
   <ul class='reasons'><li>Good Stage 2: 9.9% above 50 SMA</li><li>SMAs rising strongly (50:0.223, 200:0.070)</li><li>🔴 Revenue: Recent decline -6.2% QoQ (3Q avg: 1.4%, PENALTY)</li><li>🟡 EPS: +12% YoY</li><li>Inventory neutral (-0.6% QoQ)</li><li>Volume pattern neutral (ratio 1.09)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1494,18 +1674,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$78.49</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$87.04</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$78.49</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$113.15</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">3.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1519,12 +1706,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+2.64</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $8.55 → 목표 $26.11</div>
+  
   <ul class='reasons'><li>Good Stage 2: 9.8% above 50 SMA</li><li>SMAs rising weakly</li><li>🔴 Revenue: 3Q avg -0.1% QoQ (-6.8% → -3.7% → 10.1%)</li><li>🔴 EPS: -26% YoY</li><li>Inventory neutral (2.3% QoQ)</li><li>Volume pattern neutral (ratio 1.06)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1544,18 +1731,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$352.18</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$376.26</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$352.18</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$489.14</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">4.7:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1569,12 +1763,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.67</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $24.08 → 목표 $112.88</div>
+  
   <ul class='reasons'><li>Good Stage 2: 7.2% above 50 SMA</li><li>SMAs rising strongly (50:0.177, 200:0.134)</li><li>🔴 Revenue: Recent decline -12.6% QoQ (3Q avg: -1.8%, PENALTY)</li><li>🟡 EPS: +4% YoY</li><li>Inventory neutral (-0.6% QoQ)</li><li>✓ Volume heavier on up days (2.8M vs 1.5M, ratio 1.81)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1594,18 +1788,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$89.22</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$91.98</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$89.22</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$119.57</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">10.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1619,12 +1820,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#eab308">+0.78</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $2.76 → 목표 $27.59</div>
+  
   <ul class='reasons'><li>Weak Stage 2: 2.0% above 50 SMA</li><li>SMAs rising strongly (50:0.156, 200:0.081)</li><li>🟡 Revenue: 3Q avg 1.4% QoQ (0.4% → 1.9% → 1.8%)</li><li>🔴 EPS: -6% YoY</li><li>Inventory neutral (2.7% QoQ)</li><li>⚠ Volume heavier on down days (ratio 0.85 - distribution)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1644,18 +1845,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$131.89</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$140.34</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$131.89</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$182.44</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">5.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1669,12 +1877,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.48</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $8.45 → 목표 $42.10</div>
+  
   <ul class='reasons'><li>Good Stage 2: 7.2% above 50 SMA</li><li>SMAs rising strongly (50:0.126, 200:0.225)</li><li>🔴 Revenue: Recent decline -16.5% QoQ (3Q avg: 1.4%, PENALTY)</li><li>🔴 EPS: -25% YoY</li><li>Inventory neutral (0.1% QoQ)</li><li>Volume pattern neutral (ratio 1.05)</li></ul>
 </div>
 <div class="card buy-card">
@@ -1694,18 +1902,25 @@ a{color:var(--blue);text-decoration:none}
 
   <div class="badges"><span class="tag" style="background:#eab30822;color:#eab308;border-color:#eab30844">⭐ VCP 79/100</span><span class="tag" style="color:#22c55e;border-color:#22c55e44">좋음</span></div>
 
-  <div class="metrics">
-    <div class="metric">
-      <div class="m-label">손절가</div>
-      <div class="m-value">$70.70</div>
+  <div class="price-row">
+    <div class="price-box">
+      <div class="p-label">종가</div>
+      <div class="p-value">$72.89</div>
     </div>
+    <div class="price-box" style="border:1px solid #ef444444">
+      <div class="p-label">손절가</div>
+      <div class="p-value" style="color:#ef4444">$70.70</div>
+    </div>
+    <div class="price-box" style="border:1px solid #22c55e44">
+      <div class="p-label">익절가</div>
+      <div class="p-value" style="color:#22c55e">$94.76</div>
+    </div>
+  </div>
+
+  <div class="metrics">
     <div class="metric">
       <div class="m-label">손익비</div>
       <div class="m-value" style="color:#22c55e">10.0:1</div>
-    </div>
-    <div class="metric">
-      <div class="m-label">돌파가</div>
-      <div class="m-value">—</div>
     </div>
     <div class="metric">
       <div class="m-label">RS 기울기</div>
@@ -1719,12 +1934,12 @@ a{color:var(--blue);text-decoration:none}
       <div class="m-label">진입 품질</div>
       <div class="m-value" style="color:#22c55e">좋음</div>
     </div>
-    <div class="metric metric--wm" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
-      <div class="m-label">WM 점수</div>
+    <div class="metric" title="가중모멘텀: 12×(1개월) + 4×(3개월) + 2×(6개월) + 1×(12개월)">
+      <div class="m-label">WM</div>
       <div class="m-value" style="color:#22c55e">+1.11</div>
     </div>
   </div>
-  <div class='rr-detail'>리스크 $2.19 → 목표 $21.87</div>
+  
   <ul class='reasons'><li>Weak Stage 2: 1.9% above 50 SMA</li><li>SMAs rising strongly (50:0.116, 200:0.081)</li><li>🔴 Revenue: Recent decline -6.3% QoQ (3Q avg: -3.4%, PENALTY)</li><li>🟢 EPS: +106% YoY (strong earnings)</li><li>⚠ Inventory building (7.1% QoQ)</li><li>⚠ Volume heavier on down days (ratio 0.73 - distribution)</li></ul>
 </div>
   </div>
