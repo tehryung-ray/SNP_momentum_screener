@@ -1,0 +1,57 @@
+# ── 환경 / 시크릿 ──────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets.yaml
+secrets.json
+credentials.json
+token.json
+
+# ── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.pickle
+venv/
+env/
+ENV/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# ── 데이터 / 캐시 ────────────────────────────────────────────
+# 기본적으로 data/ 전체 무시
+data/*
+
+# GitHub Actions 자동 커밋용 캐시만 허용
+!data/fundamentals_cache/
+!data/fundamentals_cache/**
+
+# 일일 스캔 결과 허용 (GitHub Pages에 필요)
+!data/daily_scans/
+!data/daily_scans/**
+
+# ── 로그 ────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── IDE / OS ─────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── 테스트 커버리지 ──────────────────────────────────────────
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ── Claude Code 세션 데이터 ──────────────────────────────────
+.claude/

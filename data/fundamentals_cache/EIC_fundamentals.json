@@ -1,0 +1,14 @@
+{
+  "data": {
+    "ticker": "EIC",
+    "fetch_date": "2026-05-11T15:48:36.389723",
+    "quarterly_revenue": {
+      "2025-06-30 00:00:00": 13984613.0
+    },
+    "quarterly_eps": {
+      "2025-06-30 00:00:00": 0.09
+    },
+    "inventory_breakdown_available": false
+  },
+  "fetched_at": "2026-05-11T15:48:36.390045"
+}
