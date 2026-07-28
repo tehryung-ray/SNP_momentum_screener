@@ -15,6 +15,143 @@ from pathlib import Path
 
 
 # ---------------------------------------------------------------------------
+# S&P 500 GICS 섹터 맵  (ticker → 섹터 약칭)
+# ---------------------------------------------------------------------------
+_SECTOR_MAP = {
+    # ── Information Technology ──────────────────────────────────────────
+    "AAPL":"IT","MSFT":"IT","NVDA":"IT","AVGO":"IT","CRM":"IT","AMD":"IT",
+    "ORCL":"IT","ADBE":"IT","INTC":"IT","TXN":"IT","QCOM":"IT","AMAT":"IT",
+    "ADI":"IT","KLAC":"IT","LRCX":"IT","MCHP":"IT","MU":"IT","NXPI":"IT",
+    "TEL":"IT","WDC":"IT","STX":"IT","KEYS":"IT","CTSH":"IT","IT":"IT",
+    "ACN":"IT","IBM":"IT","CDNS":"IT","SNPS":"IT","ANSS":"IT","TYL":"IT",
+    "CDW":"IT","EPAM":"IT","ROP":"IT","FFIV":"IT","NTAP":"IT","JNPR":"IT",
+    "HPQ":"IT","HPE":"IT","GLW":"IT","ZBRA":"IT","SWKS":"IT","QRVO":"IT",
+    "TER":"IT","MPWR":"IT","ON":"IT","FTNT":"IT","LDOS":"IT","SAIC":"IT",
+    "BAH":"IT","GDDY":"IT","SMCI":"IT","GEN":"IT","ENPH":"IT","SEDG":"IT",
+    # ── Health Care ─────────────────────────────────────────────────────
+    "UNH":"헬스","LLY":"헬스","JNJ":"헬스","ABBV":"헬스","MRK":"헬스",
+    "TMO":"헬스","ABT":"헬스","DHR":"헬스","AMGN":"헬스","ISRG":"헬스",
+    "GILD":"헬스","MDT":"헬스","VRTX":"헬스","REGN":"헬스","ELV":"헬스",
+    "CI":"헬스","HUM":"헬스","SYK":"헬스","BSX":"헬스","ZTS":"헬스",
+    "EW":"헬스","BIIB":"헬스","IDXX":"헬스","DXCM":"헬스","IQV":"헬스",
+    "BDX":"헬스","MTD":"헬스","A":"헬스","RMD":"헬스","WAT":"헬스",
+    "WST":"헬스","ALGN":"헬스","PODD":"헬스","HOLX":"헬스","STE":"헬스",
+    "RVTY":"헬스","BAX":"헬스","ZBH":"헬스","CTLT":"헬스","HCA":"헬스",
+    "MRNA":"헬스","PKI":"헬스","INCY":"헬스","TECH":"헬스","VTRS":"헬스",
+    "CAH":"헬스","MCK":"헬스","COR":"헬스","HSIC":"헬스","MOH":"헬스",
+    # ── Financials ──────────────────────────────────────────────────────
+    "JPM":"금융","BAC":"금융","WFC":"금융","GS":"금융","MS":"금융",
+    "BLK":"금융","SCHW":"금융","AXP":"금융","USB":"금융","PNC":"금융",
+    "TFC":"금융","COF":"금융","CB":"금융","MMC":"금융","AON":"금융",
+    "ICE":"금융","CME":"금융","SPGI":"금융","MCO":"금융","MSCI":"금융",
+    "AFL":"금융","MET":"금융","PRU":"금융","AIG":"금융","ALL":"금융",
+    "HIG":"금융","TRV":"금융","ACGL":"금융","RE":"금융","WRB":"금융",
+    "CINF":"금융","GL":"금융","PFG":"금융","LNC":"금융","UNM":"금융",
+    "TROW":"금융","BEN":"금융","IVZ":"금융","AMP":"금융","FIS":"금융",
+    "FI":"금융","PYPL":"금융","V":"금융","MA":"금융","DFS":"금융",
+    "SYF":"금융","BR":"금융","NDAQ":"금융","CBOE":"금융","MKTX":"금융",
+    "BK":"금융","STT":"금융","RF":"금융","CFG":"금융","FITB":"금융",
+    "KEY":"금융","HBAN":"금융","MTB":"금융","CMA":"금융","ZION":"금융",
+    "RJF":"금융","SF":"금융","FHN":"금융",
+    # ── Consumer Discretionary ──────────────────────────────────────────
+    "AMZN":"소비재","TSLA":"소비재","HD":"소비재","MCD":"소비재",
+    "BKNG":"소비재","LOW":"소비재","TJX":"소비재","SBUX":"소비재",
+    "NKE":"소비재","GM":"소비재","F":"소비재","ROST":"소비재",
+    "YUM":"소비재","MAR":"소비재","HLT":"소비재","MGM":"소비재",
+    "WYNN":"소비재","LVS":"소비재","CCL":"소비재","RCL":"소비재",
+    "NCLH":"소비재","DAL":"소비재","UAL":"소비재","AAL":"소비재",
+    "LUV":"소비재","DLTR":"소비재","DG":"소비재","ULTA":"소비재",
+    "TPR":"소비재","PVH":"소비재","RL":"소비재","VFC":"소비재",
+    "HAS":"소비재","MHK":"소비재","WHR":"소비재","LEG":"소비재",
+    "DECK":"소비재","POOL":"소비재","NVR":"소비재","PHM":"소비재",
+    "DHI":"소비재","TOL":"소비재","LEN":"소비재","BLDR":"소비재",
+    "GRMN":"소비재","AXON":"소비재","ORLY":"소비재","AZO":"소비재",
+    "BBY":"소비재","EBAY":"소비재","ETSY":"소비재","APTV":"소비재",
+    # ── Communication Services ──────────────────────────────────────────
+    "META":"통신","GOOGL":"통신","GOOG":"통신","NFLX":"통신",
+    "CHTR":"통신","CMCSA":"통신","T":"통신","VZ":"통신","TMUS":"통신",
+    "DIS":"통신","WBD":"통신","PARA":"통신","FOX":"통신","FOXA":"통신",
+    "NWS":"통신","NWSA":"통신","LYV":"통신","EA":"통신","TTWO":"통신",
+    "OMC":"통신","IPG":"통신","NYT":"통신",
+    # ── Industrials ─────────────────────────────────────────────────────
+    "GE":"산업재","CAT":"산업재","HON":"산업재","RTX":"산업재",
+    "UPS":"산업재","LMT":"산업재","BA":"산업재","GD":"산업재",
+    "NOC":"산업재","DE":"산업재","EMR":"산업재","ETN":"산업재",
+    "CSX":"산업재","NSC":"산업재","UNP":"산업재","FDX":"산업재",
+    "WM":"산업재","RSG":"산업재","CTAS":"산업재","FAST":"산업재",
+    "PCAR":"산업재","PH":"산업재","ROK":"산업재","ITW":"산업재",
+    "GWW":"산업재","AME":"산업재","XYL":"산업재","OTIS":"산업재",
+    "CARR":"산업재","TT":"산업재","IR":"산업재","SWK":"산업재",
+    "EXPD":"산업재","ODFL":"산업재","CHRW":"산업재","DAY":"산업재",
+    "HII":"산업재","TDG":"산업재","LHX":"산업재","L3H":"산업재",
+    "LDOS":"산업재","SAIC":"산업재","BAH":"산업재","PWR":"산업재",
+    "URI":"산업재","VRSK":"산업재","CPRT":"산업재","WAB":"산업재",
+    "GXO":"산업재","JBHT":"산업재","SNA":"산업재","MAS":"산업재",
+    "PNR":"산업재","ALLE":"산업재","AOS":"산업재","TDY":"산업재",
+    # ── Consumer Staples ────────────────────────────────────────────────
+    "WMT":"생필품","PG":"생필품","KO":"생필품","PEP":"생필품",
+    "COST":"생필품","PM":"생필품","MO":"생필품","CL":"생필품",
+    "KMB":"생필품","GIS":"생필품","K":"생필품","CPB":"생필품",
+    "HRL":"생필품","SJM":"생필품","CAG":"생필품","MKC":"생필품",
+    "MDLZ":"생필품","MNST":"생필품","STZ":"생필품","TAP":"생필품",
+    "BF-B":"생필품","SAM":"생필품","CHD":"생필품","CLX":"생필품",
+    "EL":"생필품","ULTA":"생필품","KR":"생필품","SYY":"생필품",
+    "TSN":"생필품","ADM":"생필품","CTVA":"생필품","FMC":"생필품",
+    # ── Energy ──────────────────────────────────────────────────────────
+    "XOM":"에너지","CVX":"에너지","SLB":"에너지","MPC":"에너지",
+    "PSX":"에너지","VLO":"에너지","OXY":"에너지","COP":"에너지",
+    "EOG":"에너지","PXD":"에너지","DVN":"에너지","APA":"에너지",
+    "FANG":"에너지","HAL":"에너지","BKR":"에너지","WMB":"에너지",
+    "KMI":"에너지","OKE":"에너지","LNG":"에너지","CTRA":"에너지",
+    "MRO":"에너지","HES":"에너지","MTDR":"에너지","FSLR":"에너지",
+    # ── Utilities ───────────────────────────────────────────────────────
+    "NEE":"유틸","DUK":"유틸","SO":"유틸","D":"유틸","AEP":"유틸",
+    "EXC":"유틸","XEL":"유틸","WEC":"유틸","ES":"유틸","PCG":"유틸",
+    "PEG":"유틸","ED":"유틸","ETR":"유틸","EIX":"유틸","AWK":"유틸",
+    "CMS":"유틸","NI":"유틸","PPL":"유틸","AES":"유틸","NRG":"유틸",
+    "FE":"유틸","CNP":"유틸","LNT":"유틸","EVRG":"유틸","SRE":"유틸",
+    "AEE":"유틸","DTE":"유틸","PNW":"유틸","VST":"유틸",
+    # ── Real Estate ─────────────────────────────────────────────────────
+    "AMT":"리츠","PLD":"리츠","CCI":"리츠","EQIX":"리츠","PSA":"리츠",
+    "SPG":"리츠","O":"리츠","DLR":"리츠","WELL":"리츠","AVB":"리츠",
+    "EQR":"리츠","UDR":"리츠","ESS":"리츠","MAA":"리츠","CPT":"리츠",
+    "ARE":"리츠","BXP":"리츠","VTR":"리츠","PEAK":"리츠","HST":"리츠",
+    "KIM":"리츠","REG":"리츠","FRT":"리츠","NNN":"리츠","CSGP":"리츠",
+    "CBRE":"리츠","JLL":"리츠","IRM":"리츠","SUI":"리츠","WY":"리츠",
+    # ── Materials ───────────────────────────────────────────────────────
+    "LIN":"소재","APD":"소재","SHW":"소재","ECL":"소재","NUE":"소재",
+    "FCX":"소재","NEM":"소재","BALL":"소재","PKG":"소재","SEE":"소재",
+    "CF":"소재","MOS":"소재","ALB":"소재","CE":"소재","EMN":"소재",
+    "PPG":"소재","RPM":"소재","VMC":"소재","MLM":"소재","IFF":"소재",
+    "LYB":"소재","DD":"소재","DOW":"소재","CTVA":"소재","FMC":"소재",
+}
+
+_SECTOR_COLOR = {
+    "IT":    ("#60a5fa", "#1e3a5f"),   # 파랑
+    "헬스":  ("#34d399", "#064e3b"),   # 에메랄드
+    "금융":  ("#fbbf24", "#3d2000"),   # 노랑
+    "소비재":("#fb923c", "#431407"),   # 주황
+    "통신":  ("#a78bfa", "#2e1065"),   # 보라
+    "산업재":("#94a3b8", "#1e293b"),   # 슬레이트
+    "생필품":("#6ee7b7", "#064e3b"),   # 민트
+    "에너지":("#f87171", "#450a0a"),   # 빨강
+    "유틸":  ("#7dd3fc", "#0c2540"),   # 하늘
+    "리츠":  ("#f9a8d4", "#4a0020"),   # 핑크
+    "소재":  ("#86efac", "#052e16"),   # 연두
+}
+
+
+def _sector_badge(ticker: str) -> str:
+    sector = _SECTOR_MAP.get(ticker.upper())
+    if not sector:
+        return ""
+    text_c, bg_c = _SECTOR_COLOR.get(sector, ("#94a3b8", "#1e293b"))
+    return (f'<span class="sector-pill" '
+            f'style="color:{text_c};background:{bg_c};border-color:{text_c}44">'
+            f'{sector}</span>')
+
+
+# ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
 
@@ -164,7 +301,10 @@ def _render_buy_card(sig: dict, rank: int) -> str:
   <div class="card-head">
     <div>
       <div class="rank">#{rank}</div>
-      <div class="ticker buy-color">{ticker}</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">{ticker}</div>
+        {_sector_badge(ticker)}
+      </div>
       <div class="phase-tag" style="color:{_phase_color(phase)}">{phase}페이즈 · {_e(_phase_label(phase))}</div>
     </div>
     <div class="score-ring {sc}">
@@ -245,7 +385,10 @@ def _render_sell_card(sig: dict, rank: int) -> str:
   <div class="card-head">
     <div>
       <div class="rank">#{rank}</div>
-      <div class="ticker sell-color">{ticker}</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker sell-color">{ticker}</div>
+        {_sector_badge(ticker)}
+      </div>
       <div class="phase-tag" style="color:{_phase_color(phase)}">{phase}페이즈 · {_e(_phase_label(phase))}</div>
     </div>
     <div class="score-ring {sc}">
@@ -431,6 +574,7 @@ a{{color:var(--blue);text-decoration:none}}
 /* Badges */
 .badges{{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}}
 .tag{{font-size:11px;padding:2px 7px;border-radius:10px;border:1px solid;font-weight:600}}
+.sector-pill{{font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid;font-weight:700;letter-spacing:.3px;vertical-align:middle}}
 
 /* Price row (종가 / 손절가 / 익절가) */
 .price-row{{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0}}

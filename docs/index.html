@@ -94,6 +94,7 @@ a{color:var(--blue);text-decoration:none}
 /* Badges */
 .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
 .tag{font-size:11px;padding:2px 7px;border-radius:10px;border:1px solid;font-weight:600}
+.sector-pill{font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid;font-weight:700;letter-spacing:.3px;vertical-align:middle}
 
 /* Price row (종가 / 손절가 / 익절가) */
 .price-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0}
@@ -236,7 +237,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#1</div>
-      <div class="ticker buy-color">BAC</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">BAC</div>
+        <span class="sector-pill" style="color:#fbbf24;background:#3d2000;border-color:#fbbf2444">금융</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring excellent">
@@ -293,7 +297,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#2</div>
-      <div class="ticker buy-color">USB</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">USB</div>
+        <span class="sector-pill" style="color:#fbbf24;background:#3d2000;border-color:#fbbf2444">금융</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring excellent">
@@ -350,7 +357,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#3</div>
-      <div class="ticker buy-color">PLD</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">PLD</div>
+        <span class="sector-pill" style="color:#f9a8d4;background:#4a0020;border-color:#f9a8d444">리츠</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring excellent">
@@ -407,7 +417,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#4</div>
-      <div class="ticker buy-color">JPM</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">JPM</div>
+        <span class="sector-pill" style="color:#fbbf24;background:#3d2000;border-color:#fbbf2444">금융</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -464,7 +477,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#5</div>
-      <div class="ticker buy-color">CSX</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">CSX</div>
+        <span class="sector-pill" style="color:#94a3b8;background:#1e293b;border-color:#94a3b844">산업재</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -521,7 +537,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#6</div>
-      <div class="ticker buy-color">GOOGL</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">GOOGL</div>
+        <span class="sector-pill" style="color:#a78bfa;background:#2e1065;border-color:#a78bfa44">통신</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -578,7 +597,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#7</div>
-      <div class="ticker buy-color">LLY</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">LLY</div>
+        <span class="sector-pill" style="color:#34d399;background:#064e3b;border-color:#34d39944">헬스</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -635,7 +657,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#8</div>
-      <div class="ticker buy-color">MS</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">MS</div>
+        <span class="sector-pill" style="color:#fbbf24;background:#3d2000;border-color:#fbbf2444">금융</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -692,7 +717,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#9</div>
-      <div class="ticker buy-color">GS</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">GS</div>
+        <span class="sector-pill" style="color:#fbbf24;background:#3d2000;border-color:#fbbf2444">금융</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -749,7 +777,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#10</div>
-      <div class="ticker buy-color">RTX</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">RTX</div>
+        <span class="sector-pill" style="color:#94a3b8;background:#1e293b;border-color:#94a3b844">산업재</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -806,7 +837,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#11</div>
-      <div class="ticker buy-color">PM</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">PM</div>
+        <span class="sector-pill" style="color:#6ee7b7;background:#064e3b;border-color:#6ee7b744">생필품</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -863,7 +897,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#12</div>
-      <div class="ticker buy-color">CB</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">CB</div>
+        <span class="sector-pill" style="color:#fbbf24;background:#3d2000;border-color:#fbbf2444">금융</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -920,7 +957,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#13</div>
-      <div class="ticker buy-color">PNC</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">PNC</div>
+        <span class="sector-pill" style="color:#fbbf24;background:#3d2000;border-color:#fbbf2444">금융</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -977,7 +1017,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#14</div>
-      <div class="ticker buy-color">DE</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">DE</div>
+        <span class="sector-pill" style="color:#94a3b8;background:#1e293b;border-color:#94a3b844">산업재</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -1034,7 +1077,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#15</div>
-      <div class="ticker buy-color">HUM</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">HUM</div>
+        <span class="sector-pill" style="color:#34d399;background:#064e3b;border-color:#34d39944">헬스</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -1091,7 +1137,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#16</div>
-      <div class="ticker buy-color">AAPL</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">AAPL</div>
+        <span class="sector-pill" style="color:#60a5fa;background:#1e3a5f;border-color:#60a5fa44">IT</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring good">
@@ -1148,7 +1197,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#17</div>
-      <div class="ticker buy-color">GE</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">GE</div>
+        <span class="sector-pill" style="color:#94a3b8;background:#1e293b;border-color:#94a3b844">산업재</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1205,7 +1257,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#18</div>
-      <div class="ticker buy-color">JNJ</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">JNJ</div>
+        <span class="sector-pill" style="color:#34d399;background:#064e3b;border-color:#34d39944">헬스</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1262,7 +1317,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#19</div>
-      <div class="ticker buy-color">DUK</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">DUK</div>
+        <span class="sector-pill" style="color:#7dd3fc;background:#0c2540;border-color:#7dd3fc44">유틸</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1319,7 +1377,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#20</div>
-      <div class="ticker buy-color">UNH</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">UNH</div>
+        <span class="sector-pill" style="color:#34d399;background:#064e3b;border-color:#34d39944">헬스</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1376,7 +1437,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#21</div>
-      <div class="ticker buy-color">MRK</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">MRK</div>
+        <span class="sector-pill" style="color:#34d399;background:#064e3b;border-color:#34d39944">헬스</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1433,7 +1497,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#22</div>
-      <div class="ticker buy-color">TSLA</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">TSLA</div>
+        <span class="sector-pill" style="color:#fb923c;background:#431407;border-color:#fb923c44">소비재</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1490,7 +1557,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#23</div>
-      <div class="ticker buy-color">SO</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">SO</div>
+        <span class="sector-pill" style="color:#7dd3fc;background:#0c2540;border-color:#7dd3fc44">유틸</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1547,7 +1617,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#24</div>
-      <div class="ticker buy-color">KO</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">KO</div>
+        <span class="sector-pill" style="color:#6ee7b7;background:#064e3b;border-color:#6ee7b744">생필품</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1604,7 +1677,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#25</div>
-      <div class="ticker buy-color">GD</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">GD</div>
+        <span class="sector-pill" style="color:#94a3b8;background:#1e293b;border-color:#94a3b844">산업재</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1661,7 +1737,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#26</div>
-      <div class="ticker buy-color">GM</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">GM</div>
+        <span class="sector-pill" style="color:#fb923c;background:#431407;border-color:#fb923c44">소비재</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1718,7 +1797,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#27</div>
-      <div class="ticker buy-color">AMGN</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">AMGN</div>
+        <span class="sector-pill" style="color:#34d399;background:#064e3b;border-color:#34d39944">헬스</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1775,7 +1857,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#28</div>
-      <div class="ticker buy-color">CL</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">CL</div>
+        <span class="sector-pill" style="color:#6ee7b7;background:#064e3b;border-color:#6ee7b744">생필품</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1832,7 +1917,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#29</div>
-      <div class="ticker buy-color">TGT</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">TGT</div>
+        
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1889,7 +1977,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#30</div>
-      <div class="ticker buy-color">MO</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker buy-color">MO</div>
+        <span class="sector-pill" style="color:#6ee7b7;background:#064e3b;border-color:#6ee7b744">생필품</span>
+      </div>
       <div class="phase-tag" style="color:#22c55e">2페이즈 · 상승추세</div>
     </div>
     <div class="score-ring ok">
@@ -1964,7 +2055,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#1</div>
-      <div class="ticker sell-color">ISRG</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker sell-color">ISRG</div>
+        <span class="sector-pill" style="color:#34d399;background:#064e3b;border-color:#34d39944">헬스</span>
+      </div>
       <div class="phase-tag" style="color:#ef4444">4페이즈 · 하락추세</div>
     </div>
     <div class="score-ring excellent">
@@ -1999,7 +2093,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#2</div>
-      <div class="ticker sell-color">IBM</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker sell-color">IBM</div>
+        <span class="sector-pill" style="color:#60a5fa;background:#1e3a5f;border-color:#60a5fa44">IT</span>
+      </div>
       <div class="phase-tag" style="color:#ef4444">4페이즈 · 하락추세</div>
     </div>
     <div class="score-ring good">
@@ -2034,7 +2131,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#3</div>
-      <div class="ticker sell-color">ORCL</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker sell-color">ORCL</div>
+        <span class="sector-pill" style="color:#60a5fa;background:#1e3a5f;border-color:#60a5fa44">IT</span>
+      </div>
       <div class="phase-tag" style="color:#ef4444">4페이즈 · 하락추세</div>
     </div>
     <div class="score-ring good">
@@ -2069,7 +2169,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#4</div>
-      <div class="ticker sell-color">META</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker sell-color">META</div>
+        <span class="sector-pill" style="color:#a78bfa;background:#2e1065;border-color:#a78bfa44">통신</span>
+      </div>
       <div class="phase-tag" style="color:#ef4444">4페이즈 · 하락추세</div>
     </div>
     <div class="score-ring good">
@@ -2104,7 +2207,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#5</div>
-      <div class="ticker sell-color">NFLX</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker sell-color">NFLX</div>
+        <span class="sector-pill" style="color:#a78bfa;background:#2e1065;border-color:#a78bfa44">통신</span>
+      </div>
       <div class="phase-tag" style="color:#ef4444">4페이즈 · 하락추세</div>
     </div>
     <div class="score-ring good">
@@ -2139,7 +2245,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#6</div>
-      <div class="ticker sell-color">PEP</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker sell-color">PEP</div>
+        <span class="sector-pill" style="color:#6ee7b7;background:#064e3b;border-color:#6ee7b744">생필품</span>
+      </div>
       <div class="phase-tag" style="color:#ef4444">4페이즈 · 하락추세</div>
     </div>
     <div class="score-ring good">
@@ -2174,7 +2283,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#7</div>
-      <div class="ticker sell-color">MCD</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker sell-color">MCD</div>
+        <span class="sector-pill" style="color:#fb923c;background:#431407;border-color:#fb923c44">소비재</span>
+      </div>
       <div class="phase-tag" style="color:#ef4444">4페이즈 · 하락추세</div>
     </div>
     <div class="score-ring good">
@@ -2209,7 +2321,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#8</div>
-      <div class="ticker sell-color">LOW</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker sell-color">LOW</div>
+        <span class="sector-pill" style="color:#fb923c;background:#431407;border-color:#fb923c44">소비재</span>
+      </div>
       <div class="phase-tag" style="color:#ef4444">4페이즈 · 하락추세</div>
     </div>
     <div class="score-ring good">
@@ -2244,7 +2359,10 @@ a{color:var(--blue);text-decoration:none}
   <div class="card-head">
     <div>
       <div class="rank">#9</div>
-      <div class="ticker sell-color">WMT</div>
+      <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+        <div class="ticker sell-color">WMT</div>
+        <span class="sector-pill" style="color:#6ee7b7;background:#064e3b;border-color:#6ee7b744">생필품</span>
+      </div>
       <div class="phase-tag" style="color:#ef4444">4페이즈 · 하락추세</div>
     </div>
     <div class="score-ring ok">
