@@ -465,6 +465,7 @@ a{{color:var(--blue);text-decoration:none}}
   <div class="hdr-meta">
     <div>스캔 날짜: <strong style="color:var(--text)">{scan_date}</strong></div>
     <div>{generated_at}</div>
+    <a href="guide.html" style="display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:4px 10px;text-decoration:none;margin-top:4px;transition:color .15s,border-color .15s" onmouseover="this.style.color='var(--text)';this.style.borderColor='var(--muted)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border)'">📖 완전 가이드</a>
   </div>
 </div>
 
