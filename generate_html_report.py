@@ -453,7 +453,10 @@ a{{color:var(--blue);text-decoration:none}}
   .metrics{{grid-template-columns:repeat(2,1fr)}}
   .spy-top{{flex-direction:column}}
 }}
+.ad-banner{{text-align:center;margin:16px 0;overflow:hidden}}
+.ad-banner iframe{{max-width:100%;border:none}}
 </style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9724013230967786" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -499,6 +502,15 @@ a{{color:var(--blue);text-decoration:none}}
     </div>
   </div>
 
+  <!-- 광고 1 -->
+  <div class="ad-banner">
+    <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-9724013230967786" data-ad-slot="5386218570" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
+  </div>
+  <div class="ad-banner">
+    <iframe src="https://ads-partners.coupang.com/widgets.html?id=962570&template=carousel&trackingCode=AF1576178&subId=&width=728&height=90&tsource=" width="728" height="90" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" style="max-width:100%;"></iframe>
+  </div>
+
   <!-- SPY 배너 -->
   <div class="spy-banner {spy_cls}">
     <div class="spy-top">
@@ -539,6 +551,15 @@ a{{color:var(--blue);text-decoration:none}}
   </div>
   <div class="grid">
     {"".join([_render_buy_card(s, i+1) for i, s in enumerate(buy_signals[:30])]) if buy_signals else no_buy}
+  </div>
+
+  <!-- 광고 2 -->
+  <div class="ad-banner">
+    <ins class="adsbygoogle" style="display:block;" data-ad-client="ca-pub-9724013230967786" data-ad-slot="5386218570" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
+  </div>
+  <div class="ad-banner">
+    <iframe src="https://ads-partners.coupang.com/widgets.html?id=962570&template=carousel&trackingCode=AF1576178&subId=&width=728&height=90&tsource=" width="728" height="90" frameborder="0" scrolling="no" referrerpolicy="unsafe-url" style="max-width:100%;"></iframe>
   </div>
 
   <!-- 매도 신호 -->
