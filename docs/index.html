@@ -132,6 +132,22 @@ a{color:var(--blue);text-decoration:none}
 }
 .ad-banner{text-align:center;margin:16px 0;overflow:hidden}
 .ad-banner iframe{max-width:100%;border:none}
+
+/* Sector Ranking Row */
+.sector-rank-box{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:20px}
+.sr-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.sr-row::-webkit-scrollbar{height:4px}
+.sr-row::-webkit-scrollbar-track{background:transparent}
+.sr-row::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.sr-chip{min-width:80px;flex-shrink:0;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 10px;text-align:center;position:relative}
+.sr-spy{min-width:90px;border:1px solid #60a5fa44;background:#1e3a5f22}
+.sr-rank{position:absolute;top:4px;right:5px;font-size:8px;color:var(--muted);font-weight:700}
+.sr-name{font-size:13px;font-weight:900;letter-spacing:-.2px;margin-bottom:1px}
+.sr-sub{font-size:9px;color:var(--muted);margin-bottom:3px}
+.sr-price{font-size:12px;font-weight:700;margin-bottom:2px;font-variant-numeric:tabular-nums}
+.sr-signal{font-size:10px;font-weight:700;margin-bottom:2px}
+.sr-counts{font-size:10px;color:var(--muted);margin-bottom:1px;white-space:nowrap}
+.sr-meta{font-size:9px;color:var(--muted);white-space:nowrap}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9724013230967786" crossorigin="anonymous"></script>
 </head>
@@ -225,6 +241,93 @@ a{color:var(--blue);text-decoration:none}
       <div class="bl-item" style="margin-left:auto">시장 폭 품질: <strong style="color:var(--text)">좋음</strong></div>
     </div>
   </div>
+
+  <div class="sector-rank-box">
+  <div class="breadth-title">GICS 섹터 강도 순위 — SPY 포함 12개</div>
+  <div class="sr-row"><div class="sr-chip sr-spy">
+  <div class="sr-name" style="color:#94a3b8">SPY</div>
+  <div class="sr-sub">벤치마크</div>
+  <div class="sr-price">$739</div>
+  <div class="sr-meta"><span style="color:#94a3b8">횡보 P1</span> · 90%</div>
+</div>
+<div class="sr-chip" style="border-color:#22c55e">
+  <div class="sr-rank">#1</div>
+  <div class="sr-name" style="color:#fbbf24">금융</div>
+  <div class="sr-signal" style="color:#22c55e">강세</div>
+  <div class="sr-counts">매수 <b>7</b> · 매도 <b style="color:#ef4444">0</b></div>
+  <div class="sr-meta">RS +0.24</div>
+</div>
+<div class="sr-chip" style="border-color:#22c55e">
+  <div class="sr-rank">#2</div>
+  <div class="sr-name" style="color:#94a3b8">산업재</div>
+  <div class="sr-signal" style="color:#22c55e">강세</div>
+  <div class="sr-counts">매수 <b>5</b> · 매도 <b style="color:#ef4444">0</b></div>
+  <div class="sr-meta">RS +0.14</div>
+</div>
+<div class="sr-chip" style="border-color:#22c55e88">
+  <div class="sr-rank">#3</div>
+  <div class="sr-name" style="color:#34d399">헬스</div>
+  <div class="sr-signal" style="color:#86efac">우세</div>
+  <div class="sr-counts">매수 <b>7</b> · 매도 <b style="color:#ef4444">1</b></div>
+  <div class="sr-meta">RS +0.04</div>
+</div>
+<div class="sr-chip" style="border-color:#22c55e">
+  <div class="sr-rank">#4</div>
+  <div class="sr-name" style="color:#f9a8d4">리츠</div>
+  <div class="sr-signal" style="color:#22c55e">강세</div>
+  <div class="sr-counts">매수 <b>1</b> · 매도 <b style="color:#ef4444">0</b></div>
+  <div class="sr-meta">RS +0.46</div>
+</div>
+<div class="sr-chip" style="border-color:#22c55e">
+  <div class="sr-rank">#5</div>
+  <div class="sr-name" style="color:#7dd3fc">유틸</div>
+  <div class="sr-signal" style="color:#22c55e">강세</div>
+  <div class="sr-counts">매수 <b>2</b> · 매도 <b style="color:#ef4444">0</b></div>
+  <div class="sr-meta">RS +0.04</div>
+</div>
+<div class="sr-chip" style="border-color:#22c55e88">
+  <div class="sr-rank"></div>
+  <div class="sr-name" style="color:#6ee7b7">생필품</div>
+  <div class="sr-signal" style="color:#86efac">우세</div>
+  <div class="sr-counts">매수 <b>4</b> · 매도 <b style="color:#ef4444">2</b></div>
+  <div class="sr-meta">RS +0.12</div>
+</div>
+<div class="sr-chip" style="border-color:#22c55e88">
+  <div class="sr-rank"></div>
+  <div class="sr-name" style="color:#fb923c">소비재</div>
+  <div class="sr-signal" style="color:#86efac">우세</div>
+  <div class="sr-counts">매수 <b>3</b> · 매도 <b style="color:#ef4444">2</b></div>
+  <div class="sr-meta">RS +0.28</div>
+</div>
+<div class="sr-chip" style="border-color:#64748b">
+  <div class="sr-rank"></div>
+  <div class="sr-name" style="color:#f87171">에너지</div>
+  <div class="sr-signal" style="color:#94a3b8">중립</div>
+  <div class="sr-counts">매수 <b>0</b> · 매도 <b style="color:#ef4444">0</b></div>
+  <div class="sr-meta">RS —</div>
+</div>
+<div class="sr-chip" style="border-color:#64748b">
+  <div class="sr-rank"></div>
+  <div class="sr-name" style="color:#86efac">소재</div>
+  <div class="sr-signal" style="color:#94a3b8">중립</div>
+  <div class="sr-counts">매수 <b>0</b> · 매도 <b style="color:#ef4444">0</b></div>
+  <div class="sr-meta">RS —</div>
+</div>
+<div class="sr-chip" style="border-color:#ef444488">
+  <div class="sr-rank"></div>
+  <div class="sr-name" style="color:#60a5fa">IT</div>
+  <div class="sr-signal" style="color:#fca5a5">혼조</div>
+  <div class="sr-counts">매수 <b>1</b> · 매도 <b style="color:#ef4444">2</b></div>
+  <div class="sr-meta">RS +0.07</div>
+</div>
+<div class="sr-chip" style="border-color:#ef444488">
+  <div class="sr-rank"></div>
+  <div class="sr-name" style="color:#a78bfa">통신</div>
+  <div class="sr-signal" style="color:#fca5a5">혼조</div>
+  <div class="sr-counts">매수 <b>1</b> · 매도 <b style="color:#ef4444">2</b></div>
+  <div class="sr-meta">RS —</div>
+</div></div>
+</div>
 
   <!-- 매수 신호 -->
   <div class="section-hdr">

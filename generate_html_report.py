@@ -151,6 +151,114 @@ def _sector_badge(ticker: str) -> str:
             f'{sector}</span>')
 
 
+_ALL_SECTORS = ["IT", "헬스", "금융", "소비재", "통신", "산업재", "생필품", "에너지", "유틸", "리츠", "소재"]
+
+
+def _build_sector_stats(buy_signals: list, sell_signals: list) -> list:
+    """매수·매도 신호에서 섹터별 통계를 집계, 강도 순 정렬."""
+    from collections import defaultdict
+    buys = defaultdict(list)
+    sells = defaultdict(list)
+    for s in buy_signals:
+        sector = _SECTOR_MAP.get(s["ticker"].upper())
+        if sector:
+            rs = (s.get("details") or {}).get("rs_slope")
+            buys[sector].append({
+                "score": s.get("score", 0),
+                "rs": rs if isinstance(rs, (int, float)) else None,
+            })
+    for s in sell_signals:
+        sector = _SECTOR_MAP.get(s["ticker"].upper())
+        if sector:
+            sells[sector].append(s.get("score", 0))
+
+    rows = []
+    for sector in _ALL_SECTORS:
+        b = buys.get(sector, [])
+        sv = sells.get(sector, [])
+        buy_cnt = len(b)
+        sell_cnt = len(sv)
+        rs_vals = [x["rs"] for x in b if x["rs"] is not None]
+        avg_rs = round(sum(rs_vals) / len(rs_vals), 3) if rs_vals else None
+        avg_score = round(sum(x["score"] for x in b) / buy_cnt, 1) if buy_cnt else 0
+        # 강도 점수: 매수 2점, 매도 -3점, RS 보정
+        strength = buy_cnt * 2 - sell_cnt * 3 + (avg_rs * 10 if avg_rs else 0)
+        rows.append({
+            "sector": sector,
+            "buy_cnt": buy_cnt,
+            "sell_cnt": sell_cnt,
+            "avg_rs": avg_rs,
+            "avg_score": avg_score,
+            "strength": strength,
+        })
+    rows.sort(key=lambda x: x["strength"], reverse=True)
+    return rows
+
+
+def _render_sector_ranking(spy: dict, sector_stats: list) -> str:
+    """SPY + 11 GICS 섹터를 강도 순 한 줄 카드로 렌더."""
+    spy_phase = spy.get("phase", 0)
+    spy_price = spy.get("current_price", 0)
+    spy_slope50 = spy.get("slope_50", 0)
+    spy_conf = spy.get("confidence", 0)
+    phase_colors = {1: "#94a3b8", 2: "#22c55e", 3: "#eab308", 4: "#ef4444"}
+    spy_col = phase_colors.get(spy_phase, "#94a3b8")
+    spy_trend_label = {1: "횡보", 2: "상승", 3: "분산", 4: "하락"}.get(spy_phase, "N/A")
+
+    # SPY 카드
+    spy_card = f"""<div class="sr-chip sr-spy">
+  <div class="sr-name" style="color:{spy_col}">SPY</div>
+  <div class="sr-sub">벤치마크</div>
+  <div class="sr-price">${spy_price:.0f}</div>
+  <div class="sr-meta"><span style="color:{spy_col}">{spy_trend_label} P{spy_phase}</span> · {spy_conf:.0f}%</div>
+</div>"""
+
+    chips = [spy_card]
+    for i, row in enumerate(sector_stats):
+        sector = row["sector"]
+        text_c, bg_c = _SECTOR_COLOR.get(sector, ("#94a3b8", "#1e293b"))
+        b, sv = row["buy_cnt"], row["sell_cnt"]
+        avg_rs = row["avg_rs"]
+
+        if b > 0 and sv == 0:
+            border_col = "#22c55e"
+            signal = "강세"
+            sig_col = "#22c55e"
+        elif sv > 0 and b == 0:
+            border_col = "#ef4444"
+            signal = "약세"
+            sig_col = "#ef4444"
+        elif b > sv:
+            border_col = "#22c55e88"
+            signal = "우세"
+            sig_col = "#86efac"
+        elif sv > b:
+            border_col = "#ef444488"
+            signal = "혼조"
+            sig_col = "#fca5a5"
+        else:
+            border_col = "#64748b"
+            signal = "중립"
+            sig_col = "#94a3b8"
+
+        rs_str = f"RS {avg_rs:+.2f}" if avg_rs is not None else "RS —"
+        rank_num = f"#{i+1}" if i < 5 else ""
+
+        chips.append(f"""<div class="sr-chip" style="border-color:{border_col}">
+  <div class="sr-rank">{rank_num}</div>
+  <div class="sr-name" style="color:{text_c}">{sector}</div>
+  <div class="sr-signal" style="color:{sig_col}">{signal}</div>
+  <div class="sr-counts">매수 <b>{b}</b> · 매도 <b style="color:#ef4444">{sv}</b></div>
+  <div class="sr-meta">{rs_str}</div>
+</div>""")
+
+    inner = "\n".join(chips)
+    return f"""<div class="sector-rank-box">
+  <div class="breadth-title">GICS 섹터 강도 순위 — SPY 포함 12개</div>
+  <div class="sr-row">{inner}</div>
+</div>"""
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -464,6 +572,9 @@ def generate_html(data: dict) -> str:
     buy_signals = data.get("buy_signals") or []
     sell_signals = data.get("sell_signals") or []
 
+    sector_stats = _build_sector_stats(buy_signals, sell_signals)
+    sector_ranking_html = _render_sector_ranking(spy, sector_stats)
+
     no_buy = '<div class="empty-state">오늘 매수 신호 없음. 시장 상황이 불리할 수 있습니다.</div>'
     no_sell = '<div class="empty-state">오늘 매도 신호 없음.</div>'
 
@@ -612,6 +723,22 @@ a{{color:var(--blue);text-decoration:none}}
 }}
 .ad-banner{{text-align:center;margin:16px 0;overflow:hidden}}
 .ad-banner iframe{{max-width:100%;border:none}}
+
+/* Sector Ranking Row */
+.sector-rank-box{{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:20px}}
+.sr-row{{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}}
+.sr-row::-webkit-scrollbar{{height:4px}}
+.sr-row::-webkit-scrollbar-track{{background:transparent}}
+.sr-row::-webkit-scrollbar-thumb{{background:var(--border);border-radius:2px}}
+.sr-chip{{min-width:80px;flex-shrink:0;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:8px 10px;text-align:center;position:relative}}
+.sr-spy{{min-width:90px;border:1px solid #60a5fa44;background:#1e3a5f22}}
+.sr-rank{{position:absolute;top:4px;right:5px;font-size:8px;color:var(--muted);font-weight:700}}
+.sr-name{{font-size:13px;font-weight:900;letter-spacing:-.2px;margin-bottom:1px}}
+.sr-sub{{font-size:9px;color:var(--muted);margin-bottom:3px}}
+.sr-price{{font-size:12px;font-weight:700;margin-bottom:2px;font-variant-numeric:tabular-nums}}
+.sr-signal{{font-size:10px;font-weight:700;margin-bottom:2px}}
+.sr-counts{{font-size:10px;color:var(--muted);margin-bottom:1px;white-space:nowrap}}
+.sr-meta{{font-size:9px;color:var(--muted);white-space:nowrap}}
 </style>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9724013230967786" crossorigin="anonymous"></script>
 </head>
@@ -700,6 +827,8 @@ a{{color:var(--blue);text-decoration:none}}
       <div class="bl-item" style="margin-left:auto">시장 폭 품질: <strong style="color:var(--text)">{bq}</strong></div>
     </div>
   </div>
+
+  {sector_ranking_html}
 
   <!-- 매수 신호 -->
   <div class="section-hdr">
