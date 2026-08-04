@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "TPR",
-    "fetch_date": "2026-07-28T14:00:11.974345",
+    "fetch_date": "2026-08-04T14:05:58.360403",
     "quarterly_revenue": {
       "2024-12-31 00:00:00": NaN,
       "2025-03-31 00:00:00": 1584600000.0,
@@ -36,5 +36,5 @@
     "inventory_to_sales_ratio": 0.439,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-07-28T14:00:11.975755"
+  "fetched_at": "2026-08-04T14:05:58.361711"
 }
