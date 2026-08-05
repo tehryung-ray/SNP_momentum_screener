@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "EMR",
-    "fetch_date": "2026-07-28T14:51:07.089370",
+    "fetch_date": "2026-08-05T14:00:39.141568",
     "quarterly_revenue": {
       "2024-12-31 00:00:00": NaN,
       "2025-03-31 00:00:00": 4432000000.0,
@@ -36,5 +36,5 @@
     "inventory_to_sales_ratio": 0.537,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-07-28T14:51:07.091513"
+  "fetched_at": "2026-08-05T14:00:39.142740"
 }

@@ -4176,7 +4176,7 @@
     "in_earnings_season": true
   },
   "TYL": {
-    "last_updated": "2026-07-27T15:49:49.066734",
+    "last_updated": "2026-08-05T14:02:39.956586",
     "in_earnings_season": true
   },
   "VERX": {
@@ -4196,47 +4196,47 @@
     "in_earnings_season": true
   },
   "BRK-B": {
-    "last_updated": "2026-07-28T14:50:20.372858",
+    "last_updated": "2026-08-05T13:59:07.062722",
     "in_earnings_season": true
   },
   "ACN": {
-    "last_updated": "2026-07-28T14:50:32.631406",
+    "last_updated": "2026-08-05T13:59:30.791371",
     "in_earnings_season": true
   },
   "LIN": {
-    "last_updated": "2026-07-28T14:50:35.597707",
+    "last_updated": "2026-08-05T13:59:36.979511",
     "in_earnings_season": true
   },
   "DHR": {
-    "last_updated": "2026-07-28T14:50:37.043619",
+    "last_updated": "2026-08-05T13:59:40.140797",
     "in_earnings_season": true
   },
   "INTU": {
-    "last_updated": "2026-07-28T14:50:40.030817",
+    "last_updated": "2026-08-05T13:59:45.103097",
     "in_earnings_season": true
   },
   "MDT": {
-    "last_updated": "2026-07-28T14:50:50.306754",
+    "last_updated": "2026-08-05T14:00:06.147637",
     "in_earnings_season": true
   },
   "SCHW": {
-    "last_updated": "2026-07-28T14:50:55.547385",
+    "last_updated": "2026-08-05T14:00:17.033461",
     "in_earnings_season": true
   },
   "AON": {
-    "last_updated": "2026-07-28T14:51:02.382023",
+    "last_updated": "2026-08-05T14:00:30.168991",
     "in_earnings_season": true
   },
   "ITW": {
-    "last_updated": "2026-07-28T14:51:02.720920",
+    "last_updated": "2026-08-05T14:00:31.091798",
     "in_earnings_season": true
   },
   "SHW": {
-    "last_updated": "2026-07-28T14:51:06.043862",
+    "last_updated": "2026-08-05T14:00:36.988541",
     "in_earnings_season": true
   },
   "EMR": {
-    "last_updated": "2026-07-28T14:51:07.093888",
+    "last_updated": "2026-08-05T14:00:39.143583",
     "in_earnings_season": true
   },
   "PEP": {
@@ -4248,7 +4248,7 @@
     "in_earnings_season": true
   },
   "LOW": {
-    "last_updated": "2026-07-28T13:56:24.644023",
+    "last_updated": "2026-08-05T13:59:56.137130",
     "in_earnings_season": true
   },
   "EW": {
@@ -4268,7 +4268,7 @@
     "in_earnings_season": true
   },
   "HSY": {
-    "last_updated": "2026-07-28T13:57:51.521042",
+    "last_updated": "2026-08-05T14:01:23.460920",
     "in_earnings_season": true
   },
   "TEL": {
@@ -4717,6 +4717,10 @@
   },
   "WHR": {
     "last_updated": "2026-08-04T14:06:08.170400",
+    "in_earnings_season": true
+  },
+  "WYNN": {
+    "last_updated": "2026-08-05T14:03:56.366512",
     "in_earnings_season": true
   }
 }
