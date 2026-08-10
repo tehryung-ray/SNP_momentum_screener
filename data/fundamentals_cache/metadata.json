@@ -2068,7 +2068,7 @@
     "in_earnings_season": true
   },
   "RSG": {
-    "last_updated": "2026-07-30T13:52:23.816575",
+    "last_updated": "2026-08-10T13:00:47.573101",
     "in_earnings_season": true
   },
   "RSI": {
@@ -3524,11 +3524,11 @@
     "in_earnings_season": true
   },
   "ABT": {
-    "last_updated": "2026-07-31T13:55:12.458509",
+    "last_updated": "2026-08-10T12:58:40.664348",
     "in_earnings_season": true
   },
   "ADI": {
-    "last_updated": "2026-07-31T13:55:46.332354",
+    "last_updated": "2026-08-10T12:59:14.684530",
     "in_earnings_season": true
   },
   "AEO": {
@@ -3560,7 +3560,7 @@
     "in_earnings_season": true
   },
   "BKNG": {
-    "last_updated": "2026-07-31T13:55:37.341599",
+    "last_updated": "2026-08-10T12:59:05.525431",
     "in_earnings_season": true
   },
   "CBL": {
@@ -3576,7 +3576,7 @@
     "in_earnings_season": true
   },
   "CDNS": {
-    "last_updated": "2026-07-31T13:57:52.167051",
+    "last_updated": "2026-08-10T13:01:20.328886",
     "in_earnings_season": true
   },
   "CMS": {
@@ -3604,7 +3604,7 @@
     "in_earnings_season": true
   },
   "DXCM": {
-    "last_updated": "2026-07-31T13:56:42.273135",
+    "last_updated": "2026-08-10T13:00:10.395076",
     "in_earnings_season": true
   },
   "ENSG": {
@@ -3648,7 +3648,7 @@
     "in_earnings_season": true
   },
   "IQV": {
-    "last_updated": "2026-07-31T13:57:16.388578",
+    "last_updated": "2026-08-10T13:00:44.366477",
     "in_earnings_season": true
   },
   "IRON": {
@@ -3732,11 +3732,11 @@
     "in_earnings_season": true
   },
   "SWKS": {
-    "last_updated": "2026-07-31T13:58:31.257165",
+    "last_updated": "2026-08-10T13:01:59.446499",
     "in_earnings_season": true
   },
   "SYK": {
-    "last_updated": "2026-07-31T13:55:38.285030",
+    "last_updated": "2026-08-10T12:59:06.988360",
     "in_earnings_season": true
   },
   "USLM": {
@@ -4288,7 +4288,7 @@
     "in_earnings_season": true
   },
   "CPRT": {
-    "last_updated": "2026-07-28T13:58:43.582715",
+    "last_updated": "2026-08-10T13:01:21.840110",
     "in_earnings_season": true
   },
   "IR": {
@@ -4708,7 +4708,7 @@
     "in_earnings_season": true
   },
   "AXP": {
-    "last_updated": "2026-07-31T13:55:25.538666",
+    "last_updated": "2026-08-10T12:58:53.411940",
     "in_earnings_season": true
   },
   "BSX": {
@@ -4721,6 +4721,10 @@
   },
   "WYNN": {
     "last_updated": "2026-08-05T14:03:56.366512",
+    "in_earnings_season": true
+  },
+  "STZ": {
+    "last_updated": "2026-08-10T13:00:06.428831",
     "in_earnings_season": true
   }
 }
