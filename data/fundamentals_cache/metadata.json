@@ -3688,7 +3688,7 @@
     "in_earnings_season": true
   },
   "NOC": {
-    "last_updated": "2026-08-03T14:31:04.859980",
+    "last_updated": "2026-08-11T12:55:41.717347",
     "in_earnings_season": true
   },
   "OIS": {
@@ -3760,7 +3760,7 @@
     "in_earnings_season": true
   },
   "BAH": {
-    "last_updated": "2026-08-03T14:35:12.631042",
+    "last_updated": "2026-08-11T12:59:49.756718",
     "in_earnings_season": true
   },
   "BBNX": {
@@ -3820,11 +3820,11 @@
     "in_earnings_season": true
   },
   "HCA": {
-    "last_updated": "2026-08-03T14:31:39.616920",
+    "last_updated": "2026-08-11T12:56:16.617824",
     "in_earnings_season": true
   },
   "ICE": {
-    "last_updated": "2026-08-03T14:31:16.689759",
+    "last_updated": "2026-08-11T12:55:53.730662",
     "in_earnings_season": true
   },
   "IIIV": {
@@ -3832,7 +3832,7 @@
     "in_earnings_season": true
   },
   "LMT": {
-    "last_updated": "2026-08-03T14:35:04.286898",
+    "last_updated": "2026-08-11T12:59:40.778007",
     "in_earnings_season": true
   },
   "MMS": {
@@ -3892,11 +3892,11 @@
     "in_earnings_season": true
   },
   "UHS": {
-    "last_updated": "2026-08-03T14:33:26.685320",
+    "last_updated": "2026-08-11T12:58:03.808281",
     "in_earnings_season": true
   },
   "ULTA": {
-    "last_updated": "2026-08-03T14:32:44.734799",
+    "last_updated": "2026-08-11T12:57:21.700676",
     "in_earnings_season": true
   },
   "USNA": {
@@ -4408,7 +4408,7 @@
     "in_earnings_season": true
   },
   "COST": {
-    "last_updated": "2026-07-30T13:49:59.437197",
+    "last_updated": "2026-08-11T12:54:38.823453",
     "in_earnings_season": true
   },
   "HD": {
@@ -4712,7 +4712,7 @@
     "in_earnings_season": true
   },
   "BSX": {
-    "last_updated": "2026-08-03T14:31:24.563295",
+    "last_updated": "2026-08-11T12:56:01.675767",
     "in_earnings_season": true
   },
   "WHR": {
@@ -4725,6 +4725,18 @@
   },
   "STZ": {
     "last_updated": "2026-08-10T13:00:06.428831",
+    "in_earnings_season": true
+  },
+  "NFLX": {
+    "last_updated": "2026-08-11T12:54:47.719863",
+    "in_earnings_season": true
+  },
+  "ISRG": {
+    "last_updated": "2026-08-11T12:55:15.803643",
+    "in_earnings_season": true
+  },
+  "CSGP": {
+    "last_updated": "2026-08-11T12:57:37.707025",
     "in_earnings_season": true
   }
 }
