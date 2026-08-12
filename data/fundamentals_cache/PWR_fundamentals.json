@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "PWR",
-    "fetch_date": "2026-08-04T14:05:42.182182",
+    "fetch_date": "2026-08-12T13:03:22.459652",
     "quarterly_revenue": {
       "2025-06-30 00:00:00": 6773007000.0,
       "2025-09-30 00:00:00": 7631408000.0,
@@ -36,5 +36,5 @@
     "inventory_to_sales_ratio": 0.049,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-08-04T14:05:42.183790"
+  "fetched_at": "2026-08-12T13:03:22.461148"
 }

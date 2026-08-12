@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "PCAR",
-    "fetch_date": "2026-08-04T14:05:34.017361",
+    "fetch_date": "2026-08-12T13:03:15.009439",
     "quarterly_revenue": {
       "2025-06-30 00:00:00": 7510500000.0,
       "2025-09-30 00:00:00": 6671800000.0,
@@ -36,5 +36,5 @@
     "inventory_to_sales_ratio": 0.316,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-08-04T14:05:34.018941"
+  "fetched_at": "2026-08-12T13:03:15.010910"
 }

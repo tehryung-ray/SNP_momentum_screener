@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "BF-B",
-    "fetch_date": "2026-08-04T14:05:16.166955",
+    "fetch_date": "2026-08-12T13:02:56.375074",
     "quarterly_revenue": {
       "2025-01-31 00:00:00": NaN,
       "2025-04-30 00:00:00": 894000000.0,
@@ -37,5 +37,5 @@
     "inventory_to_sales_ratio": 2.788,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-08-04T14:05:16.168562"
+  "fetched_at": "2026-08-12T13:02:56.376541"
 }

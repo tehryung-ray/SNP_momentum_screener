@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "FSLR",
-    "fetch_date": "2026-08-04T14:06:21.179649",
+    "fetch_date": "2026-08-12T13:04:01.378476",
     "quarterly_revenue": {
       "2024-12-31 00:00:00": NaN,
       "2025-03-31 00:00:00": NaN,
@@ -40,5 +40,5 @@
     "inventory_to_sales_ratio": 1.35,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-08-04T14:06:21.181301"
+  "fetched_at": "2026-08-12T13:04:01.380003"
 }
