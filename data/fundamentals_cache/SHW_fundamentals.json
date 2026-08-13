@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "SHW",
-    "fetch_date": "2026-08-05T14:00:36.985289",
+    "fetch_date": "2026-08-13T13:01:38.864234",
     "quarterly_revenue": {
       "2024-12-31 00:00:00": NaN,
       "2025-03-31 00:00:00": NaN,
@@ -40,5 +40,5 @@
     "inventory_to_sales_ratio": 0.373,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-08-05T14:00:36.987180"
+  "fetched_at": "2026-08-13T13:01:38.865751"
 }
