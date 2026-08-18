@@ -4746,5 +4746,33 @@
   "ORCL": {
     "last_updated": "2026-08-14T12:56:47.590885",
     "in_earnings_season": true
+  },
+  "TSLA": {
+    "last_updated": "2026-08-18T12:37:14.800089",
+    "in_earnings_season": false
+  },
+  "IBM": {
+    "last_updated": "2026-08-18T12:37:51.008793",
+    "in_earnings_season": false
+  },
+  "CCI": {
+    "last_updated": "2026-08-18T12:38:52.700006",
+    "in_earnings_season": false
+  },
+  "KR": {
+    "last_updated": "2026-08-18T12:39:43.775103",
+    "in_earnings_season": false
+  },
+  "ROL": {
+    "last_updated": "2026-08-18T12:40:38.811431",
+    "in_earnings_season": false
+  },
+  "PNR": {
+    "last_updated": "2026-08-18T12:41:28.743491",
+    "in_earnings_season": false
+  },
+  "BLDR": {
+    "last_updated": "2026-08-18T12:42:18.747668",
+    "in_earnings_season": false
   }
 }
