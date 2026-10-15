@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "BR",
-    "fetch_date": "2026-08-12T13:02:42.291501",
+    "fetch_date": "2026-10-15T16:16:14.183086",
     "quarterly_revenue": {
       "2025-06-30 00:00:00": 2065400000.0,
       "2025-09-30 00:00:00": 1589400000.0,
@@ -25,5 +25,5 @@
     "operating_margin": 24.61,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-08-12T13:02:42.292652"
+  "fetched_at": "2026-10-15T16:16:14.184516"
 }
