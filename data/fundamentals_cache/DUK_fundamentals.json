@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "DUK",
-    "fetch_date": "2026-10-15T16:13:46.351173",
+    "fetch_date": "2026-10-22T16:33:28.094509",
     "quarterly_revenue": {
       "2025-06-30 00:00:00": 7508000000.0,
       "2025-09-30 00:00:00": 8542000000.0,
@@ -35,5 +35,5 @@
     "inventory_to_sales_ratio": 0.614,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-10-15T16:13:46.353796"
+  "fetched_at": "2026-10-22T16:33:28.095916"
 }

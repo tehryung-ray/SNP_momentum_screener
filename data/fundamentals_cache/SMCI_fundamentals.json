@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "SMCI",
-    "fetch_date": "2026-10-15T16:17:36.216919",
+    "fetch_date": "2026-10-22T16:37:18.068002",
     "quarterly_revenue": {
       "2025-03-31 00:00:00": NaN,
       "2025-06-30 00:00:00": 5756911000.0,
@@ -36,5 +36,5 @@
     "inventory_to_sales_ratio": 1.16,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-10-15T16:17:36.218695"
+  "fetched_at": "2026-10-22T16:37:18.069395"
 }
