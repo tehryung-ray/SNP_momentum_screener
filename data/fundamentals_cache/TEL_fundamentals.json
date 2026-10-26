@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "TEL",
-    "fetch_date": "2026-10-16T16:01:33.511411",
+    "fetch_date": "2026-10-26T18:11:16.156574",
     "quarterly_revenue": {
       "2025-03-31 00:00:00": NaN,
       "2025-06-30 00:00:00": 4534000000.0,
@@ -37,5 +37,5 @@
     "inventory_to_sales_ratio": 0.587,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-10-16T16:01:33.512634"
+  "fetched_at": "2026-10-26T18:11:16.157567"
 }
