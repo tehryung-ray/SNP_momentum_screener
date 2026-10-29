@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "INTU",
-    "fetch_date": "2026-10-22T16:32:53.981543",
+    "fetch_date": "2026-10-29T17:58:17.711283",
     "quarterly_revenue": {
       "2025-01-31 00:00:00": NaN,
       "2025-07-31 00:00:00": 3831000000.0,
@@ -27,5 +27,5 @@
     "operating_margin": 17.64,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-10-22T16:32:53.982646"
+  "fetched_at": "2026-10-29T17:58:17.712643"
 }

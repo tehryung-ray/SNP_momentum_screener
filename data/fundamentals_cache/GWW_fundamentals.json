@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "GWW",
-    "fetch_date": "2026-10-22T16:34:19.918670",
+    "fetch_date": "2026-10-29T17:59:43.952051",
     "quarterly_revenue": {
       "2025-06-30 00:00:00": 4554000000.0,
       "2025-09-30 00:00:00": 4657000000.0,
@@ -35,5 +35,5 @@
     "inventory_to_sales_ratio": 0.472,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-10-22T16:34:19.920066"
+  "fetched_at": "2026-10-29T17:59:43.953819"
 }

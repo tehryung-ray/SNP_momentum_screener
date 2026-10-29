@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "ZTS",
-    "fetch_date": "2026-10-22T16:33:24.131754",
+    "fetch_date": "2026-10-29T17:58:47.804766",
     "quarterly_revenue": {
       "2025-03-31 00:00:00": NaN,
       "2025-06-30 00:00:00": 2474000000.0,
@@ -37,5 +37,5 @@
     "inventory_to_sales_ratio": 1.043,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-10-22T16:33:24.133157"
+  "fetched_at": "2026-10-29T17:58:47.806441"
 }
