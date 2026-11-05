@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "SLB",
-    "fetch_date": "2026-10-29T17:59:39.780974",
+    "fetch_date": "2026-11-05T19:28:05.743250",
     "quarterly_revenue": {
       "2025-06-30 00:00:00": NaN,
       "2025-09-30 00:00:00": 8928000000.0,
@@ -38,5 +38,5 @@
     "inventory_to_sales_ratio": 0.584,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-10-29T17:59:39.782742"
+  "fetched_at": "2026-11-05T19:28:05.744390"
 }

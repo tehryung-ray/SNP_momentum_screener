@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "CCL",
-    "fetch_date": "2026-10-29T18:02:46.875410",
+    "fetch_date": "2026-11-05T19:31:12.643159",
     "quarterly_revenue": {
       "2025-02-28 00:00:00": NaN,
       "2025-05-31 00:00:00": NaN,
@@ -39,5 +39,5 @@
     "inventory_to_sales_ratio": 0.063,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-10-29T18:02:46.877172"
+  "fetched_at": "2026-11-05T19:31:12.644289"
 }
