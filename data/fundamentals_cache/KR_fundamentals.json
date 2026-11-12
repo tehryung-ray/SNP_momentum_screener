@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "KR",
-    "fetch_date": "2026-11-05T19:28:34.458788",
+    "fetch_date": "2026-11-12T19:31:16.904659",
     "quarterly_revenue": {
       "2025-07-31 00:00:00": 33940000000.0,
       "2025-10-31 00:00:00": 33859000000.0,
@@ -35,5 +35,5 @@
     "inventory_to_sales_ratio": 0.21,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-11-05T19:28:34.459900"
+  "fetched_at": "2026-11-12T19:31:16.906424"
 }

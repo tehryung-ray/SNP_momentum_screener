@@ -1,19 +1,17 @@
 {
   "data": {
     "ticker": "BR",
-    "fetch_date": "2026-11-05T19:29:45.448891",
+    "fetch_date": "2026-11-12T19:32:27.830697",
     "quarterly_revenue": {
-      "2025-06-30 00:00:00": 2065400000.0,
       "2025-09-30 00:00:00": 1589400000.0,
       "2025-12-31 00:00:00": 1713900000.0,
       "2026-03-31 00:00:00": 1953600000.0,
       "2026-06-30 00:00:00": 2219900000.0,
-      "2026-09-30 00:00:00": NaN
+      "2026-09-30 00:00:00": 1668700000.0
     },
-    "revenue_qoq_change": null,
-    "revenue_yoy_change": null,
+    "revenue_qoq_change": -24.829947294923194,
+    "revenue_yoy_change": 4.989304139927016,
     "quarterly_eps": {
-      "2025-06-30 00:00:00": NaN,
       "2025-09-30 00:00:00": 1.4,
       "2025-12-31 00:00:00": 2.42,
       "2026-03-31 00:00:00": 2.36,
@@ -22,10 +20,10 @@
     },
     "eps_qoq_change": -75.87209302325581,
     "eps_yoy_change": -40.714285714285715,
-    "gross_margin": NaN,
-    "margin_change": NaN,
-    "operating_margin": NaN,
+    "gross_margin": 25.67,
+    "margin_change": -12.75,
+    "operating_margin": 10.4,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-11-05T19:29:45.449770"
+  "fetched_at": "2026-11-12T19:32:27.832000"
 }

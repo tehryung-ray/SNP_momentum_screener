@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "ITW",
-    "fetch_date": "2026-11-05T19:27:29.561022",
+    "fetch_date": "2026-11-12T19:30:11.738456",
     "quarterly_revenue": {
       "2025-09-30 00:00:00": 4059000000.0,
       "2025-12-31 00:00:00": 4093000000.0,
@@ -36,5 +36,5 @@
     "inventory_to_sales_ratio": 0.43,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-11-05T19:27:29.562210"
+  "fetched_at": "2026-11-12T19:30:11.740207"
 }
