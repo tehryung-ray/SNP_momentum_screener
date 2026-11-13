@@ -1,7 +1,7 @@
 {
   "data": {
     "ticker": "TPR",
-    "fetch_date": "2026-11-06T18:53:29.247086",
+    "fetch_date": "2026-11-13T19:12:25.808174",
     "quarterly_revenue": {
       "2025-03-31 00:00:00": NaN,
       "2025-06-30 00:00:00": NaN,
@@ -15,15 +15,15 @@
     "revenue_yoy_change": 11.085043988269796,
     "quarterly_eps": {
       "2025-03-31 00:00:00": NaN,
-      "2025-06-30 00:00:00": -2.49,
+      "2025-06-30 00:00:00": NaN,
       "2025-09-30 00:00:00": 1.28,
       "2025-12-31 00:00:00": 2.68,
       "2026-03-31 00:00:00": 1.65,
       "2026-06-30 00:00:00": 1.68,
-      "2026-09-30 00:00:00": NaN
+      "2026-09-30 00:00:00": 1.76
     },
-    "eps_qoq_change": null,
-    "eps_yoy_change": null,
+    "eps_qoq_change": 4.761904761904766,
+    "eps_yoy_change": 37.5,
     "gross_margin": 78.56,
     "margin_change": -4.76,
     "operating_margin": 22.39,
@@ -40,5 +40,5 @@
     "inventory_to_sales_ratio": 0.557,
     "inventory_breakdown_available": false
   },
-  "fetched_at": "2026-11-06T18:53:29.248357"
+  "fetched_at": "2026-11-13T19:12:25.809828"
 }
